@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "is_partial": true,
+    "description": "S2 — 적용 업종 7 industry shortcut bubbles."
+  },
+  "type": "composite",
+  "name": "QuickSection",
+  "props": {}
+}

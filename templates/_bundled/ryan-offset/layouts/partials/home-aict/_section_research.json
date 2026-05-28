@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "is_partial": true,
+    "description": "S5 — 연구·사업 5 image cards (마지막 카드는 항상 타이틀 노출)."
+  },
+  "type": "composite",
+  "name": "ResearchSection",
+  "props": {}
+}

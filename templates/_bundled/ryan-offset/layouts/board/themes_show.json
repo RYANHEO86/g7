@@ -1,0 +1,118 @@
+{
+  "version": "1.0.1",
+  "layout_name": "board/themes_show",
+  "permissions": [],
+  "extends": "_user_base",
+  "meta": {
+    "seo": {
+      "enabled": true,
+      "data_sources": [
+        "post"
+      ],
+      "page_type": "board",
+      "vars": {
+        "site_name": "$core_settings:general.site_name",
+        "post_title": "{{post.data.title ?? ''}}"
+      },
+      "priority": 0.6,
+      "changefreq": "weekly",
+      "og": {
+        "type": "article",
+        "title": "{{post.data.title ?? ''}}",
+        "description": "{{post.data.extra_data?.description_short ?? ''}}",
+        "image": "{{post.data.extra_data?.thumbnail ?? ''}}"
+      }
+    }
+  },
+  "init_actions": [
+    {
+      "handler": "setState",
+      "params": {
+        "target": "global",
+        "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+        "hideDefaultHeader": true,
+        "hideDefaultFooter": true
+      }
+    }
+  ],
+  "data_sources": [
+    {
+      "id": "post",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-board/boards/theme/posts/{{route.id}}",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": {
+        "data": {}
+      }
+    },
+    {
+      "id": "nav",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-board/boards/theme/posts/{{route.id}}/navigation",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": {
+        "data": {}
+      }
+    }
+  ],
+  "slots": {
+    "content": [
+      {
+        "type": "basic",
+        "name": "Div",
+        "props": {
+          "className": "aict-home"
+        },
+        "children": [
+          {
+            "partial": "partials/theme-aict/_subpage_header.json"
+          },
+          {
+            "type": "composite",
+            "name": "ThemeDetailContent",
+            "props": {
+              "id": "{{post.data.id}}",
+              "category": "{{post.data.category ?? ''}}",
+              "title": "{{post.data.title ?? ''}}",
+              "summary": "{{post.data.extra_data?.description_short ?? ''}}",
+              "description": "{{post.data.extra_data?.description_long ?? post.data.content ?? ''}}",
+              "gallery": "{{post.data.extra_data?.gallery_images ?? []}}",
+              "features": "{{post.data.extra_data?.features ?? []}}",
+              "changelog": "{{post.data.extra_data?.changelog ?? []}}",
+              "installNote": "{{post.data.extra_data?.install_note ?? ''}}",
+              "price": "{{post.data.extra_data?.price ?? 0}}",
+              "rating": "{{post.data.extra_data?.rating ?? 0}}",
+              "reviewCount": "{{post.data.extra_data?.review_count ?? 0}}",
+              "purchaseHref": "{{post.data.extra_data?.purchase_url ?? '#'}}",
+              "demoHref": "{{post.data.extra_data?.demo_url ?? '#'}}",
+              "specs": "{{[{label:'최소 요구', value: (post.data.extra_data?.min_requirement ?? '-')}, {label:'라이선스', value: (post.data.extra_data?.license ?? '-')}, {label:'업데이트', value: (post.data.extra_data?.last_update ?? '-')}, {label:'다운로드', value: (post.data.extra_data?.download_count != null ? post.data.extra_data.download_count.toLocaleString('ko-KR') + '회' : '-')}]}}",
+              "prevPost": "{{nav.data.prev ? {id: nav.data.prev.id, title: nav.data.prev.title} : null}}",
+              "nextPost": "{{nav.data.next ? {id: nav.data.next.id, title: nav.data.next.title} : null}}",
+              "listHref": "/board/theme",
+              "baseHref": "/board/theme",
+              "canEdit": "{{post.data.is_owner || post.data.abilities?.update || post.data.abilities?.write || false}}",
+              "canDelete": "{{post.data.is_owner || post.data.abilities?.delete || false}}",
+              "editHref": "/admin/board/theme/{{route.id}}/edit",
+              "deleteEndpoint": "/api/modules/sirsoft-board/boards/theme/posts/{{route.id}}",
+              "afterDeleteHref": "/board/theme"
+            }
+          },
+          {
+            "partial": "partials/home-aict/_aict_footer.json"
+          }
+        ]
+      }
+    ]
+  },
+  "modals": [
+    {
+      "partial": "partials/board/show/modals/_modal_delete.json"
+    }
+  ]
+}

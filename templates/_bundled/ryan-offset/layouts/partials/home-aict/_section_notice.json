@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "is_partial": true,
+    "description": "S4 — 알림마당+융기원 동향 (좌) + 발간물+POPUP ZONE (우) 2-col grid."
+  },
+  "type": "composite",
+  "name": "NoticeArea",
+  "props": {}
+}

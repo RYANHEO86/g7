@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "is_partial": true,
+    "description": "AICT 스타일 푸터 (Band1 관련사이트 + Band2 정책 + Band3 정보+마크). 메인 페이지 전용 — _user_base.json의 글로벌 푸터는 init_actions의 hideDefaultFooter=true로 숨김."
+  },
+  "type": "composite",
+  "name": "AictFooter",
+  "props": {}
+}

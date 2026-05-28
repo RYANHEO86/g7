@@ -1,0 +1,298 @@
+/* ============================================================
+   home-aict / section3-4.css
+   원본 그대로 + (1) .layout→.aict-layout 일괄 치환,
+   (2) 모든 선언을 .aict-home {} nesting wrapper로 격리,
+   (3) @keyframes 만 외부로 추출 (nesting 불가)
+   ============================================================ */
+.aict-home {
+/* ============================================================
+   Section 3 — Quick Service Bar
+   Section 4 — 연구 · 사업 (research cards)
+   ============================================================ */
+
+/* ============================================================
+   SECTION 3 — Use cases bar (직후 히어로)
+   ============================================================ */
+.section-quick {
+  padding: 80px 0 90px;
+  background: var(--bg);
+  position: relative;
+}
+
+.quick-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.quick-head .eyebrow { margin-bottom: 14px; }
+.quick-head__title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.032em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.quick-list {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+.quick-item { display: flex; }
+.quick-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  width: 100%;
+  padding: 14px 4px 10px;
+  transition: transform var(--t);
+}
+.quick-link:hover { transform: translateY(-4px); }
+
+/* Speech-bubble */
+.quick-bubble {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 26px;
+  background: var(--brand-50);
+  color: var(--brand-2);
+  transition: background var(--t), box-shadow var(--t), transform var(--t), color var(--t);
+}
+.quick-bubble::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: -6px;
+  width: 14px;
+  height: 14px;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  border-bottom-right-radius: 4px;
+  transition: background var(--t);
+}
+.quick-link:hover .quick-bubble {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(0, 162, 105, 0.30);
+  transform: scale(1.05);
+}
+
+.quick-ico {
+  width: 34px;
+  height: 34px;
+  stroke-width: 1.8;
+  transition: transform var(--t);
+}
+.quick-link:hover .quick-ico { transform: scale(1.05); }
+
+.quick-label {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.014em;
+  color: var(--ink-2);
+  text-align: center;
+  transition: color var(--t-fast);
+}
+.quick-link:hover .quick-label { color: var(--brand-2); }
+
+
+/* ============================================================
+   SECTION 4 — 연구 · 사업
+   ============================================================ */
+.section-research {
+  padding: 130px 0 120px;
+  background: var(--bg);
+}
+
+.research-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 60px;
+  margin-bottom: 44px;
+}
+.research-head__left { flex: 0 0 auto; }
+.research-head__left .eyebrow { margin-bottom: 16px; }
+.research-head__left .section-tit {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.036em;
+  line-height: 1.04;
+  color: var(--ink);
+}
+.research-head__desc {
+  flex: 0 1 540px;
+  max-width: 540px;
+  margin: 0;
+  padding-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  color: var(--ink-4);
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+}
+
+.research-divider {
+  position: relative;
+  height: 1px;
+  background: var(--line);
+  margin: 0 0 32px;
+}
+.research-divider::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 120px; height: 1px;
+  background: var(--brand);
+}
+
+.research-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.rc { display: flex; }
+.rc-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #111;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(15,25,40,0.04);
+  transition: box-shadow var(--t), transform var(--t);
+}
+.rc-link:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(15,25,40,0.18), 0 4px 10px rgba(15,25,40,0.10);
+}
+
+.rc-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.rc-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 800ms var(--ease-soft);
+  filter: brightness(0.96);
+}
+.rc-link:hover .rc-media img {
+  transform: scale(1.08);
+  filter: brightness(1);
+}
+
+.rc-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.65) 100%);
+  opacity: 0;
+  transition: opacity var(--t);
+  pointer-events: none;
+}
+.rc-link:hover .rc-overlay   { opacity: 1; }
+
+.rc-index {
+  position: absolute;
+  left: 24px; top: 24px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.10em;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity var(--t), transform var(--t);
+}
+.rc-link:hover .rc-index { opacity: 1; transform: translateY(0); }
+
+.rc-title {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.028em;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--t), transform var(--t);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.30);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.rc-title::after {
+  content: "";
+  width: 26px; height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.0) no-repeat center / 11px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg>");
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity var(--t) 80ms, transform var(--t) 80ms;
+}
+.rc-link:hover .rc-title { opacity: 1; transform: translateY(0); }
+.rc-link:hover .rc-title::after { opacity: 1; transform: translateX(0); }
+
+/* The 5th card always shows */
+.rc--always .rc-overlay { opacity: 1; }
+.rc--always .rc-title   { opacity: 1; transform: translateY(0); }
+.rc--always .rc-title::after { opacity: 1; transform: translateX(0); }
+.rc--always .rc-index   { opacity: 1; transform: translateY(0); }
+
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1180px) {
+  .research-head__left .section-tit { font-size: 44px; }
+  .research-cards { grid-template-columns: repeat(3, 1fr); }
+  .rc-link { height: 360px; }
+}
+@media (max-width: 1180px) {
+  .quick-list { gap: 8px; }
+  .quick-bubble { width: 72px; height: 72px; border-radius: 22px; }
+  .quick-ico { width: 30px; height: 30px; }
+}
+@media (max-width: 880px) {
+  .section-quick { padding: 56px 0 64px; }
+  .quick-head { margin-bottom: 32px; }
+  .quick-head__title { font-size: 26px; }
+  .quick-list { grid-template-columns: repeat(4, 1fr); row-gap: 28px; }
+  .section-research { padding: 90px 0 80px; }
+  .research-head { flex-direction: column; align-items: flex-start; gap: 28px; }
+  .research-head__desc { max-width: 100%; padding-bottom: 0; }
+  .research-cards { grid-template-columns: repeat(2, 1fr); }
+  .rc-link { height: 300px; }
+  .rc-title { font-size: 20px; }
+}
+@media (max-width: 480px) {
+  .quick-list { grid-template-columns: repeat(3, 1fr); }
+  .research-cards { grid-template-columns: 1fr; }
+  .rc-link { height: 240px; }
+  .research-head__left .section-tit { font-size: 36px; }
+}
+}

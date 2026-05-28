@@ -1,0 +1,9 @@
+/* ============================================================
+   theme-aict / index — 테마 게시판 리스트/상세 스타일 진입점
+   .aict-home 부모 wrapper(themes_index/show.json) 가 풀블리드 + reset 담당.
+   여기는 .theme-list / .theme-detail 의 컴포넌트 스타일만 import.
+   본문은 내부 .aict-layout(max-width:1400px) 으로 가운데 정렬되며,
+   _user_base.json main_content max-w-7xl(1280px) 의 범위 안에서 동작한다.
+   ============================================================ */
+@import './theme-list.css';
+@import './theme-detail.css';

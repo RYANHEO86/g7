@@ -1,0 +1,140 @@
+{
+  "version": "1.0.0",
+  "layout_name": "inquiry/index",
+  "permissions": [],
+  "extends": "_user_base",
+  "meta": {
+    "seo": {
+      "enabled": true,
+      "page_type": "default",
+      "vars": { "site_name": "$core_settings:general.site_name" }
+    }
+  },
+  "init_actions": [
+    {
+      "handler": "setState",
+      "params": {
+        "target": "global",
+        "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+        "hideDefaultHeader": true,
+        "hideDefaultFooter": true
+      }
+    }
+  ],
+  "data_sources": [
+    {
+      "id": "inquiries",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-inquiry/inquiries",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "required"
+    }
+  ],
+  "slots": {
+    "content": [
+      {
+        "type": "basic",
+        "name": "Div",
+        "props": { "className": "aict-home" },
+        "children": [
+          { "partial": "partials/theme-aict/_subpage_header.json" },
+          {
+            "type": "basic",
+            "name": "Section",
+            "props": { "className": "page-hero", "aria-label": "페이지 헤더" },
+            "children": [
+              {
+                "type": "basic",
+                "name": "Div",
+                "props": { "className": "aict-layout page-hero__inner" },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": { "className": "breadcrumb", "aria-label": "현재 위치" },
+                    "children": [
+                      {
+                        "type": "basic",
+                        "name": "Ol",
+                        "props": { "className": "breadcrumb__list" },
+                        "children": [
+                          { "type": "basic", "name": "Li", "props": { "className": "breadcrumb__item" }, "children": [ { "type": "basic", "name": "A", "props": { "href": "/" }, "text": "홈" } ] },
+                          { "type": "basic", "name": "Li", "props": { "className": "breadcrumb__item is-current", "aria-current": "page" }, "text": "제작의뢰" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "basic",
+                    "name": "Div",
+                    "props": { "className": "page-hero__head" },
+                    "children": [
+                      { "type": "basic", "name": "Span", "props": { "className": "eyebrow" }, "text": "My Inquiries" },
+                      { "type": "basic", "name": "H2", "props": { "className": "page-hero__title" }, "text": "내 제작의뢰" },
+                      { "type": "basic", "name": "P", "props": { "className": "page-hero__lead" }, "text": "진행 중·완료된 제작의뢰를 한눈에 확인하세요." }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "layout",
+            "name": "Container",
+            "props": { "className": "py-8 max-w-3xl mx-auto" },
+            "children": [
+          {
+            "type": "basic",
+            "name": "Div",
+            "props": { "className": "flex items-center justify-end mb-6" },
+            "children": [
+              {
+                "type": "basic",
+                "name": "A",
+                "props": {
+                  "href": "/inquiry/new",
+                  "className": "px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700"
+                },
+                "text": "새 의뢰 작성"
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "name": "Div",
+            "props": { "className": "space-y-3" },
+            "children": [
+              {
+                "type": "for",
+                "items": "{{inquiries.data ?? []}}",
+                "as": "inquiry",
+                "render": {
+                  "type": "composite",
+                  "name": "InquiryCard",
+                  "props": {
+                    "uuid": "{{$item.uuid}}",
+                    "title": "{{$item.title}}",
+                    "status": "{{$item.status}}",
+                    "category": "{{$item.category}}",
+                    "receivedAt": "{{$item.received_at}}"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "name": "Div",
+            "if": "{{(inquiries.data ?? []).length === 0}}",
+            "props": { "className": "text-center text-gray-500 dark:text-gray-400 py-12" },
+            "text": "등록한 의뢰가 없습니다. 첫 의뢰를 작성해 보세요."
+          }
+            ]
+          },
+          { "partial": "partials/home-aict/_aict_footer.json" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+/* ============================================================
+   home-aict / index — 오프셋 테마 메인 페이지 스타일 진입점
+   순서: tokens → fonts → foundation(reset+utilities) → sections
+   ============================================================ */
+@import './_tokens.css';
+@import './_fonts.css';
+@import './foundation.css';
+@import './header.css';
+@import './hero.css';
+@import './section2.css';
+@import './section3-4.css';
+@import './section-themes.css';
+@import './section5.css';
+@import './section6-footer.css';

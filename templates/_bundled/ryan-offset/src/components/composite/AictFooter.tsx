@@ -1,0 +1,146 @@
+import React from 'react';
+import { Div, Ul, Li, A, Span, P, Img, Nav, Button } from '../basic';
+
+const ASSET_BASE =
+  '/api/templates/assets/ryan-offset/assets/images/aict';
+
+/**
+ * AICT 스타일 푸터 (오프셋 테마 메인 페이지 전용).
+ * Band1 관련사이트 + Band2 정책 메뉴 + Band3 회사 정보 + 인증 마크.
+ */
+const AictFooter: React.FC = () => {
+  return (
+    <Div className="site-footer" role="contentinfo">
+      <Div className="aict-layout site-footer__inner">
+        {/* Band 1 — Related */}
+        <Div className="footer-band footer-band--related">
+          {[
+            { label: '관련 사이트' },
+            { label: '상위기관' },
+            { label: '유관기관' },
+          ].map((b, i) => (
+            <Button
+              key={i}
+              type="button"
+              className="related-btn"
+              aria-haspopup="listbox"
+              aria-expanded={false}
+            >
+              <Span>{b.label}</Span>
+              <Span className="related-btn__icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="12"
+                  height="12"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.2}
+                  strokeLinecap="round"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </Span>
+            </Button>
+          ))}
+        </Div>
+
+        {/* Band 2 — Policy */}
+        <Nav
+          className="footer-band footer-band--policy"
+          aria-label="이용약관 및 정책"
+        >
+          <Ul className="policy-list" role="list">
+            <Li>
+              <A className="policy-link policy-link--strong" href="#">
+                개인정보처리방침
+              </A>
+            </Li>
+            <Li>
+              <A className="policy-link" href="#">
+                영상정보처리기기 운영·관리 방침
+              </A>
+            </Li>
+            <Li>
+              <A className="policy-link" href="#">
+                이메일주소무단수집거부
+              </A>
+            </Li>
+            <Li>
+              <A className="policy-link" href="#">
+                메일링 서비스
+              </A>
+            </Li>
+            <Li>
+              <A className="policy-link" href="#">
+                찾아오시는 길
+              </A>
+            </Li>
+            <Li>
+              <A className="policy-link" href="#">
+                고객센터
+              </A>
+            </Li>
+            <Li>
+              <A className="policy-link" href="#">
+                ESG
+              </A>
+            </Li>
+            <Li>
+              <A className="policy-link" href="#">
+                사이트맵
+              </A>
+            </Li>
+          </Ul>
+        </Nav>
+
+        {/* Band 3 — Info + Marks */}
+        <Div className="footer-band footer-band--bottom">
+          <Div className="footer-info">
+            <Img
+              className="footer-info__logo"
+              src={`${ASSET_BASE}/brand/offset-theme-logo-light.png`}
+              alt="Offset Theme 로고"
+            />
+            <P className="footer-info__row">
+              <Span className="label">주소</Span>
+              <Span>
+                (16229) 경기도 수원시 영통구 광교로 145(구:이의동 864-1)
+                차세대융합기술연구원
+              </Span>
+            </P>
+            <P className="footer-info__row footer-info__row--inline">
+              <Span className="info-cell">
+                <Span className="label">TEL</Span> 031-888-9114, 9115
+              </Span>
+              <Span className="info-cell">
+                <Span className="label">사업자등록번호</Span> 135-82-12905
+              </Span>
+              <Span className="info-cell">
+                <Span className="label">통신판매업신고</Span> 제2013-수원영통-0318호
+              </Span>
+            </P>
+            <P className="footer-info__copy">
+              COPYRIGHT ADVANCED INSTITUTE OF CONVERGENCE TECHNOLOGY. ALL RIGHTS
+              RESERVED.
+            </P>
+          </Div>
+
+          <Div className="footer-marks" aria-label="인증마크">
+            <Img
+              className="footer-marks__img"
+              src={`${ASSET_BASE}/footer/friendly_mark.png`}
+              alt="가족친화 우수기업 인증 마크"
+            />
+            <Img
+              className="footer-marks__img"
+              src={`${ASSET_BASE}/common/webwatch_mark.png`}
+              alt="웹와치 웹접근성 인증 마크"
+            />
+          </Div>
+        </Div>
+      </Div>
+    </Div>
+  );
+};
+
+export default AictFooter;

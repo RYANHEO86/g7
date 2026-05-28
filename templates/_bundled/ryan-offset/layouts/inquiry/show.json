@@ -1,0 +1,266 @@
+{
+  "version": "1.0.0",
+  "layout_name": "inquiry/show",
+  "permissions": [],
+  "extends": "_user_base",
+  "meta": {
+    "seo": {
+      "enabled": true,
+      "page_type": "default",
+      "vars": { "site_name": "$core_settings:general.site_name" }
+    }
+  },
+  "init_actions": [
+    {
+      "handler": "setState",
+      "params": {
+        "target": "global",
+        "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+        "hideDefaultHeader": true,
+        "hideDefaultFooter": true
+      }
+    }
+  ],
+  "data_sources": [
+    {
+      "id": "inquiry",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-inquiry/inquiries/{{route.uuid}}",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "required"
+    },
+    {
+      "id": "messages",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-inquiry/inquiries/{{route.uuid}}/messages",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "required"
+    }
+  ],
+  "slots": {
+    "content": [
+      {
+        "type": "basic",
+        "name": "Div",
+        "props": { "className": "aict-home" },
+        "children": [
+          { "partial": "partials/theme-aict/_subpage_header.json" },
+          {
+            "type": "basic",
+            "name": "Section",
+            "props": { "className": "page-hero", "aria-label": "페이지 헤더" },
+            "children": [
+              {
+                "type": "basic",
+                "name": "Div",
+                "props": { "className": "aict-layout page-hero__inner" },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": { "className": "breadcrumb", "aria-label": "현재 위치" },
+                    "children": [
+                      {
+                        "type": "basic",
+                        "name": "Ol",
+                        "props": { "className": "breadcrumb__list" },
+                        "children": [
+                          { "type": "basic", "name": "Li", "props": { "className": "breadcrumb__item" }, "children": [ { "type": "basic", "name": "A", "props": { "href": "/" }, "text": "홈" } ] },
+                          { "type": "basic", "name": "Li", "props": { "className": "breadcrumb__item" }, "children": [ { "type": "basic", "name": "A", "props": { "href": "/inquiry" }, "text": "제작의뢰" } ] },
+                          { "type": "basic", "name": "Li", "props": { "className": "breadcrumb__item is-current", "aria-current": "page" }, "text": "{{inquiry.data?.title ?? '의뢰 상세'}}" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "basic",
+                    "name": "Div",
+                    "props": { "className": "page-hero__head" },
+                    "children": [
+                      { "type": "basic", "name": "Span", "props": { "className": "eyebrow" }, "text": "Inquiry Detail" },
+                      { "type": "basic", "name": "H2", "props": { "className": "page-hero__title" }, "text": "{{inquiry.data?.title ?? '의뢰 상세'}}" },
+                      { "type": "basic", "name": "P", "props": { "className": "page-hero__lead", "if": "{{inquiry.data?.budget_range || inquiry.data?.desired_due_at}}" }, "text": "{{inquiry.data?.category ? '분류: ' + inquiry.data.category + '   ·   ' : ''}}{{inquiry.data?.budget_range ? '예산: ' + inquiry.data.budget_range + '   ·   ' : ''}}{{inquiry.data?.desired_due_at ? '희망일: ' + inquiry.data.desired_due_at : ''}}" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "layout", "name": "Container",
+            "props": { "className": "py-8 max-w-5xl mx-auto space-y-6" },
+            "children": [
+          {
+            "type": "basic", "name": "Div",
+            "props": { "className": "flex items-center justify-between gap-3" },
+            "children": [
+              {
+                "type": "basic", "name": "A",
+                "props": { "href": "/inquiry", "className": "text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" },
+                "text": "← 의뢰 목록"
+              },
+              {
+                "type": "basic", "name": "Button",
+                "if": "{{inquiry.data?.abilities?.cancel}}",
+                "props": { "className": "px-3 py-1.5 text-sm border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20" },
+                "text": "의뢰 취소",
+                "actions": [
+                  { "event": "onClick", "type": "click", "handler": "openModal", "target": "inquiry_cancel_modal" }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "composite", "name": "InquiryStatusBar",
+            "props": { "status": "{{inquiry.data?.status ?? 'received'}}" }
+          },
+          {
+            "type": "basic", "name": "Div",
+            "props": { "className": "grid grid-cols-1 lg:grid-cols-3 gap-6" },
+            "children": [
+              {
+                "type": "basic", "name": "Div",
+                "props": { "className": "lg:col-span-1 space-y-4" },
+                "children": [
+                  {
+                    "type": "basic", "name": "Div",
+                    "props": { "className": "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-5 space-y-3" },
+                    "children": [
+                      { "type": "basic", "name": "H2", "props": { "className": "text-lg font-bold text-gray-900 dark:text-white" }, "text": "{{inquiry.data?.title ?? ''}}" },
+                      { "type": "basic", "name": "P", "props": { "className": "text-sm text-gray-600 dark:text-gray-400 whitespace-pre-wrap" }, "text": "{{inquiry.data?.content ?? ''}}" },
+                      {
+                        "type": "basic", "name": "Div",
+                        "props": { "className": "pt-2 border-t border-gray-200 dark:border-gray-700 grid grid-cols-2 gap-2 text-xs text-gray-500 dark:text-gray-400" },
+                        "children": [
+                          { "type": "basic", "name": "Div", "text": "분류" },
+                          { "type": "basic", "name": "Div", "props": { "className": "text-right" }, "text": "{{inquiry.data?.category ?? '-'}}" },
+                          { "type": "basic", "name": "Div", "text": "예산" },
+                          { "type": "basic", "name": "Div", "props": { "className": "text-right" }, "text": "{{inquiry.data?.budget_range ?? '-'}}" },
+                          { "type": "basic", "name": "Div", "text": "희망 완료일" },
+                          { "type": "basic", "name": "Div", "props": { "className": "text-right" }, "text": "{{inquiry.data?.desired_due_at ?? '-'}}" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "basic", "name": "Div",
+                    "if": "{{(inquiry.data?.quotes ?? []).length > 0}}",
+                    "props": { "className": "space-y-3" },
+                    "children": [
+                      {
+                        "type": "for",
+                        "items": "{{inquiry.data?.quotes ?? []}}",
+                        "as": "quote",
+                        "render": {
+                          "type": "composite",
+                          "name": "QuoteCard",
+                          "props": {
+                            "version": "{{$item.version}}",
+                            "status": "{{$item.status}}",
+                            "totalAmount": "{{$item.total_amount}}",
+                            "taxAmount": "{{$item.tax_amount}}",
+                            "currency": "{{$item.currency}}",
+                            "validUntil": "{{$item.valid_until}}",
+                            "note": "{{$item.note}}",
+                            "items": "{{$item.items ?? []}}",
+                            "canAccept": "{{inquiry.data?.abilities?.acceptQuote && $item.status === 'issued'}}",
+                            "canReject": "{{inquiry.data?.abilities?.rejectQuote && $item.status === 'issued'}}",
+                            "submitting": "{{_local.acceptSubmitting ?? false}}"
+                          },
+                          "actions": [
+                            {
+                              "event": "onAccept", "type": "accept", "handler": "sequence",
+                              "actions": [
+                                { "handler": "setState", "params": { "target": "local", "acceptSubmitting": true } },
+                                {
+                                  "handler": "apiCall",
+                                  "target": "/api/modules/sirsoft-inquiry/inquiries/{{route.uuid}}/quotes/{{$item.id}}/accept",
+                                  "auth_required": true,
+                                  "params": { "method": "POST" },
+                                  "onSuccess": [
+                                    { "handler": "setState", "params": { "target": "local", "acceptSubmitting": false } },
+                                    {
+                                      "if": "{{response.data.redirect_url}}",
+                                      "handler": "navigate",
+                                      "params": { "path": "{{response.data.redirect_url}}" }
+                                    },
+                                    {
+                                      "if": "{{response.data.message}}",
+                                      "handler": "toast",
+                                      "params": { "type": "info", "message": "{{response.data.message}}" }
+                                    }
+                                  ],
+                                  "onError": [
+                                    { "handler": "setState", "params": { "target": "local", "acceptSubmitting": false } },
+                                    { "handler": "toast", "params": { "type": "error", "message": "{{error.message}}" } }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "event": "onReject", "type": "reject", "handler": "sequence",
+                              "actions": [
+                                { "handler": "setState", "params": { "target": "global", "quoteRejectId": "{{$item.id}}" } },
+                                { "handler": "openModal", "target": "quote_reject_modal" }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic", "name": "Div",
+                "props": { "className": "lg:col-span-2 h-[600px]" },
+                "children": [
+                  {
+                    "type": "composite", "name": "InquiryMessageThread",
+                    "props": {
+                      "messages": "{{messages.data ?? []}}",
+                      "myRole": "client",
+                      "submitting": "{{_local.messageSubmitting ?? false}}",
+                      "className": "h-full"
+                    },
+                    "actions": [
+                      {
+                        "event": "onSend", "type": "send", "handler": "sequence",
+                        "actions": [
+                          { "handler": "setState", "params": { "target": "local", "messageSubmitting": true } },
+                          {
+                            "handler": "apiCall",
+                            "target": "/api/modules/sirsoft-inquiry/inquiries/{{route.uuid}}/messages",
+                            "auth_required": true,
+                            "params": { "method": "POST", "body": { "body": "{{$event}}" } },
+                            "onSuccess": [
+                              { "handler": "setState", "params": { "target": "local", "messageSubmitting": false } },
+                              { "handler": "refetchDataSource", "params": { "dataSourceId": "messages" } }
+                            ],
+                            "onError": [
+                              { "handler": "setState", "params": { "target": "local", "messageSubmitting": false } },
+                              { "handler": "toast", "params": { "type": "error", "message": "{{error.message}}" } }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+            ]
+          },
+          { "partial": "partials/home-aict/_aict_footer.json" }
+        ]
+      }
+    ]
+  },
+  "modals": [
+    { "partial": "inquiry/partials/_modal_inquiry_cancel.json" },
+    { "partial": "inquiry/partials/_modal_quote_reject.json" }
+  ]
+}

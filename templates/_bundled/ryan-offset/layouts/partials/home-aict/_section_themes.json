@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "is_partial": true,
+    "description": "S3 — 완성된 테마 라인업 4 카드."
+  },
+  "type": "composite",
+  "name": "ThemesSection",
+  "props": {}
+}

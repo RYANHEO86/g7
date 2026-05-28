@@ -1,0 +1,96 @@
+{
+  "version": "1.0.1",
+  "layout_name": "board/themes_index",
+  "permissions": [],
+  "extends": "_user_base",
+  "meta": {
+    "seo": {
+      "enabled": true,
+      "data_sources": [
+        "posts"
+      ],
+      "page_type": "board",
+      "vars": {
+        "site_name": "$core_settings:general.site_name",
+        "board_name": "{{posts.data.board.name ?? '테마'}}"
+      },
+      "priority": 0.7,
+      "changefreq": "daily",
+      "og": {
+        "type": "website"
+      },
+      "structured_data": {
+        "@type": "ItemList"
+      }
+    }
+  },
+  "init_actions": [
+    {
+      "handler": "setState",
+      "params": {
+        "target": "global",
+        "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+        "hideDefaultHeader": true,
+        "hideDefaultFooter": true
+      }
+    }
+  ],
+  "data_sources": [
+    {
+      "id": "posts",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-board/boards/theme/posts",
+      "method": "GET",
+      "params": {
+        "page": "{{query.page ?? 1}}",
+        "per_page": 48,
+        "search": "{{query.search ?? ''}}",
+        "category": "{{query.category ?? ''}}"
+      },
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": {
+        "data": {
+          "data": [],
+          "board": {
+            "categories": []
+          },
+          "pagination": {}
+        }
+      }
+    }
+  ],
+  "slots": {
+    "content": [
+      {
+        "type": "basic",
+        "name": "Div",
+        "props": {
+          "className": "aict-home"
+        },
+        "children": [
+          {
+            "partial": "partials/theme-aict/_subpage_header.json"
+          },
+          {
+            "type": "composite",
+            "name": "ThemeListSection",
+            "props": {
+              "pageTitle": "테마",
+              "eyebrow": "Theme Collection",
+              "lead": "차세대 기술과 디자인을 융합한 프리미엄 그누보드 테마 컬렉션을 만나보세요.<br>비즈니스, 포트폴리오, 쇼핑몰, 매거진 등 다양한 분야에 최적화된 디자인을 제공합니다.",
+              "categories": "{{[{key:'all', label:'전체'}].concat(((posts.data.board.categories ?? []).map(c => ({key: c, label: c}))))}}",
+              "posts": "{{(posts.data.data ?? []).map(p => ({id: p.id, title: p.title, summary: (p.extra_data?.description_short ?? ''), thumbnail: (p.extra_data?.thumbnail ?? ''), category: (p.category ?? ''), price: (p.extra_data?.price ?? 0), href: '/board/theme/' + p.id}))}}",
+              "perPage": 12,
+              "baseHref": "/board/theme"
+            }
+          },
+          {
+            "partial": "partials/home-aict/_aict_footer.json"
+          }
+        ]
+      }
+    ]
+  }
+}

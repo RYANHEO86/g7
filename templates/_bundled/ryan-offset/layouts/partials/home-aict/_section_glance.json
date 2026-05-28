@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "is_partial": true,
+    "description": "S6 — At A Glance (경영성과 + 논문·특허·ESG + 기술이전·창업 블록 3개, CountUp 포함)."
+  },
+  "type": "composite",
+  "name": "GlanceSection",
+  "props": {}
+}

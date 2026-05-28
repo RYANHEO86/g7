@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "is_partial": true,
+    "description": "S7 — CTA SNS 섹션 (다크 배경 + YouTube/NAVER Blog/Instagram pills)."
+  },
+  "type": "composite",
+  "name": "SnsSection",
+  "props": {}
+}
