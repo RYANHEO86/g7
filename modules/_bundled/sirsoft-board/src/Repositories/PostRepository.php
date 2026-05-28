@@ -48,12 +48,14 @@ class PostRepository implements PostRepositoryInterface
         $currentPage = $filters['page'] ?? request()->input('page', 1);
 
         // 목록 전용 컬럼: content(본문 HTML) 제외 → content_preview로 대체
+        // extra_data 는 도메인별 자유 필드(가격/썸네일/태그 등) — 목록 카드 렌더에 필수
         $listColumns = [
             'id', 'board_id', 'user_id', 'parent_id', 'category',
             'title', 'author_name', 'content_mode',
             'is_notice', 'is_secret', 'status', 'depth',
             'view_count', 'comments_count', 'replies_count', 'attachments_count',
             'trigger_type', 'ip_address', 'created_at', 'updated_at', 'deleted_at',
+            'extra_data',
             DB::raw('SUBSTRING(content, 1, 200) as content_preview_raw'),
         ];
 

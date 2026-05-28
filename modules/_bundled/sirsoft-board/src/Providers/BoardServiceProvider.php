@@ -3,6 +3,7 @@
 namespace Modules\Sirsoft\Board\Providers;
 
 use App\Extension\BaseModuleServiceProvider;
+use Modules\Sirsoft\Board\Console\Commands\MigrateThemeImagesCommand;
 use Modules\Sirsoft\Board\Repositories\AttachmentRepository;
 use Modules\Sirsoft\Board\Repositories\BoardRepository;
 use Modules\Sirsoft\Board\Repositories\CommentRepository;
@@ -77,6 +78,15 @@ class BoardServiceProvider extends BaseModuleServiceProvider
     ];
 
     /**
+     * 모듈 Artisan 커맨드 목록
+     *
+     * @var array<int, class-string>
+     */
+    protected array $commands = [
+        MigrateThemeImagesCommand::class,
+    ];
+
+    /**
      * 서비스 부트스트랩
      *
      * @return void
@@ -84,6 +94,11 @@ class BoardServiceProvider extends BaseModuleServiceProvider
     public function boot(): void
     {
         parent::boot();
+
+        // 모듈 Artisan 커맨드 등록
+        if ($this->app->runningInConsole()) {
+            $this->commands($this->commands);
+        }
 
         // Sitemap 기여자 등록
         $this->app->booted(function () {

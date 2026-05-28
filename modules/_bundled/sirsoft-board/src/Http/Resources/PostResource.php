@@ -183,6 +183,12 @@ class PostResource extends BaseApiResource
             // 썸네일 이미지 (첫 번째 이미지 첨부파일)
             'thumbnail' => $this->getThumbnailUrlFromRelations(),
 
+            // 게시판 도메인별 자유 추가필드 (JSON) — 예: 테마 카탈로그의 가격/라이센스/changelog 등
+            // Eloquent cast 미적용(raw DB row)인 경우에도 안전하도록 string이면 json_decode
+            'extra_data' => is_string($this->extra_data)
+                ? json_decode($this->extra_data, true)
+                : $this->extra_data,
+
             // 계층 구조
             'parent_id' => $this->parent_id,
             'depth' => $this->depth,

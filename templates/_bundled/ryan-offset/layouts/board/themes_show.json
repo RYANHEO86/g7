@@ -20,7 +20,7 @@
         "type": "article",
         "title": "{{post.data.title ?? ''}}",
         "description": "{{post.data.extra_data?.description_short ?? ''}}",
-        "image": "{{post.data.extra_data?.thumbnail ?? ''}}"
+        "image": "{{post.data.thumbnail ?? ''}}"
       }
     }
   },
@@ -82,7 +82,7 @@
               "title": "{{post.data.title ?? ''}}",
               "summary": "{{post.data.extra_data?.description_short ?? ''}}",
               "description": "{{post.data.extra_data?.description_long ?? post.data.content ?? ''}}",
-              "gallery": "{{post.data.extra_data?.gallery_images ?? []}}",
+              "gallery": "{{(post.data.attachments ?? []).filter(a => a.is_image).map(a => a.preview_url)}}",
               "features": "{{post.data.extra_data?.features ?? []}}",
               "changelog": "{{post.data.extra_data?.changelog ?? []}}",
               "installNote": "{{post.data.extra_data?.install_note ?? ''}}",
