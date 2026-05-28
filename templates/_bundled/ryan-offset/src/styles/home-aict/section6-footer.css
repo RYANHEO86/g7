@@ -231,6 +231,40 @@
   transform: rotate(45deg);
 }
 
+/* Related dropdown (관련 사이트) */
+.related-dropdown { position: relative; }
+.related-btn[aria-expanded="true"] { border-color: var(--ink); color: var(--ink); }
+.related-btn__icon--open { transform: rotate(45deg); }
+.related-menu {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  z-index: 20;
+  min-width: 200px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+.related-menu__link {
+  display: block;
+  padding: 9px 14px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: -0.012em;
+  transition: background var(--t), color var(--t);
+}
+.related-menu__link:hover {
+  background: var(--bg-soft);
+  color: var(--ink);
+}
+
 /* ---- Band 2: Policy menu ---- */
 .footer-band--policy {
   padding: 18px 0;

@@ -1,33 +1,58 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Div, Ul, Li, A, Span, P, Img, Nav, Button } from '../basic';
 
 const ASSET_BASE =
   '/api/templates/assets/ryan-offset/assets/images/aict';
+
+const RELATED_SITES = [
+  { label: '그누보드', href: 'https://sir.kr/' },
+  { label: '리빌더', href: 'https://rebuilder.co.kr/' },
+];
 
 /**
  * AICT 스타일 푸터 (오프셋 테마 메인 페이지 전용).
  * Band1 관련사이트 + Band2 정책 메뉴 + Band3 회사 정보 + 인증 마크.
  */
 const AictFooter: React.FC = () => {
+  const [relatedOpen, setRelatedOpen] = useState(false);
+  const relatedRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!relatedOpen) return;
+    const handlePointer = (e: MouseEvent) => {
+      if (relatedRef.current && !relatedRef.current.contains(e.target as Node)) {
+        setRelatedOpen(false);
+      }
+    };
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setRelatedOpen(false);
+    };
+    document.addEventListener('mousedown', handlePointer);
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.removeEventListener('mousedown', handlePointer);
+      document.removeEventListener('keydown', handleKey);
+    };
+  }, [relatedOpen]);
+
   return (
     <Div className="site-footer" role="contentinfo">
       <Div className="aict-layout site-footer__inner">
         {/* Band 1 — Related */}
         <Div className="footer-band footer-band--related">
-          {[
-            { label: '관련 사이트' },
-            { label: '상위기관' },
-            { label: '유관기관' },
-          ].map((b, i) => (
+          <Div className="related-dropdown" ref={relatedRef}>
             <Button
-              key={i}
               type="button"
               className="related-btn"
-              aria-haspopup="listbox"
-              aria-expanded={false}
+              aria-haspopup="true"
+              aria-expanded={relatedOpen}
+              onClick={() => setRelatedOpen((v) => !v)}
             >
-              <Span>{b.label}</Span>
-              <Span className="related-btn__icon" aria-hidden="true">
+              <Span>관련 사이트</Span>
+              <Span
+                className={`related-btn__icon${relatedOpen ? ' related-btn__icon--open' : ''}`}
+                aria-hidden="true"
+              >
                 <svg
                   viewBox="0 0 24 24"
                   width="12"
@@ -41,7 +66,24 @@ const AictFooter: React.FC = () => {
                 </svg>
               </Span>
             </Button>
-          ))}
+            {relatedOpen && (
+              <Ul className="related-menu" role="menu">
+                {RELATED_SITES.map((site) => (
+                  <Li key={site.href} role="none">
+                    <A
+                      className="related-menu__link"
+                      role="menuitem"
+                      href={site.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {site.label}
+                    </A>
+                  </Li>
+                ))}
+              </Ul>
+            )}
+          </Div>
         </Div>
 
         {/* Band 2 — Policy */}
