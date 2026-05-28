@@ -17,6 +17,8 @@
   transition: background var(--t), box-shadow var(--t), border-color var(--t);
   border-bottom: 1px solid transparent;
 }
+/* subpage 변형: 오버레이(투명 fixed)가 아니라 in-flow 솔리드 헤더 — 실제 높이를 차지해 본문이 자연히 아래로 흐름. overlay(홈 hero)만 fixed 유지 */
+#aict-top-layout.type-subpage { position: relative; }
 #aict-top-layout .top_wrap {
   height: 100%;
   display: grid;

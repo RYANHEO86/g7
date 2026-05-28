@@ -221,7 +221,7 @@
                 {
                     "comment": "=== 모바일 헤더 (툴바) - 데스크톱에서 숨김 ===",
                     "id": "mobile_header",
-                    "if": "{{!_global.hideDefaultHeader}}",
+                    "if": "{{_global.useStandardChrome}}",
                     "type": "basic",
                     "name": "Div",
                     "props": {
@@ -1701,7 +1701,7 @@
                 {
                     "comment": "=== 데스크톱 헤더 (Header 컴포넌트) - 모바일에서 숨김 ===",
                     "id": "desktop_header",
-                    "if": "{{!_global.hideDefaultHeader}}",
+                    "if": "{{_global.useStandardChrome}}",
                     "type": "composite",
                     "name": "Header",
                     "props": {
@@ -1932,7 +1932,42 @@
                     ]
                 },
                 {
-                    "comment": "=== 메인 콘텐츠 영역 ===",
+                    "comment": "=== AICT 글로벌 헤더 (전 페이지 기본, solid). .aict-home 스코프 div로 감싸 헤더 CSS/리셋 적용(본문 미영향). home/테마/제작의뢰는 hideDefaultHeader=true 로 숨김 + 자체 헤더 주입 ===",
+                    "id": "aict_global_header_wrap",
+                    "if": "{{!_global.hideDefaultHeader}}",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": { "className": "aict-home" },
+                    "children": [
+                        {
+                            "comment": "AICT 글로벌 헤더 본체 (subpage solid)",
+                            "id": "aict_global_header",
+                            "type": "composite",
+                            "name": "OverlayHeader",
+                            "props": {
+                                "variant": "subpage",
+                                "logoLabel": "Offset Theme",
+                                "logoHref": "/",
+                                "menu": [
+                                    { "label": "소개", "href": "#" },
+                                    { "label": "테마", "href": "/board/theme" },
+                                    { "label": "제작의뢰", "href": "/inquiry" },
+                                    { "label": "가격", "href": "#" },
+                                    { "label": "문의", "href": "#" }
+                                ],
+                                "loginHref": "/login",
+                                "loginLabel": "로그인",
+                                "menuButtonAriaLabel": "전체 메뉴",
+                                "currentUser": "{{_global.currentUser}}",
+                                "myHref": "/mypage",
+                                "myLabel": "MY",
+                                "logoutLabel": "로그아웃"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "comment": "=== 메인 콘텐츠 영역 (AICT 글로벌 헤더가 in-flow 로 높이를 차지하므로 별도 상단 여백 불필요) ===",
                     "id": "main_content_area",
                     "type": "basic",
                     "name": "Div",
@@ -1960,9 +1995,9 @@
                     ]
                 },
                 {
-                    "comment": "=== 푸터 (Footer 컴포넌트) ===",
+                    "comment": "=== 표준 푸터 (레거시, opt-in) — useStandardChrome=true 시에만 노출 ===",
                     "id": "footer",
-                    "if": "{{!_global.hideDefaultFooter}}",
+                    "if": "{{_global.useStandardChrome}}",
                     "type": "composite",
                     "name": "Footer",
                     "props": {
@@ -1975,6 +2010,23 @@
                             "discord": "{{_global.settings?.social?.discord}}"
                         }
                     }
+                },
+                {
+                    "comment": "=== AICT 글로벌 푸터 (전 페이지 기본). .aict-home 스코프 div로 감싸 푸터 CSS 적용. home/테마/제작의뢰는 hideDefaultFooter=true 로 숨김 + 자체 푸터 주입 ===",
+                    "id": "aict_global_footer_wrap",
+                    "if": "{{!_global.hideDefaultFooter}}",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": { "className": "aict-home" },
+                    "children": [
+                        {
+                            "comment": "AICT 글로벌 푸터 본체",
+                            "id": "aict_global_footer",
+                            "type": "composite",
+                            "name": "AictFooter",
+                            "props": {}
+                        }
+                    ]
                 }
             ]
         }

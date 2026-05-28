@@ -39,7 +39,7 @@
 /* ---------- PAGE HERO ----------------------------------------- */
 .page-hero {
   position: relative;
-  padding: 168px 0 56px; /* 88px(헤더) + 80px 여유 */
+  padding: 80px 0 56px; /* 헤더가 in-flow(88px)로 높이를 차지하므로 여유분만 */
   background: linear-gradient(180deg, var(--bg-mint) 0%, var(--bg) 100%);
   border-bottom: 1px solid var(--line);
 }
@@ -292,13 +292,13 @@
 
 /* ---------- RESPONSIVE --------------------------------------- */
 @media (max-width: 1180px) {
-  .page-hero { padding: 148px 0 48px; }
+  .page-hero { padding: 60px 0 48px; }
   .page-hero__title { font-size: 56px; }
   .theme-list__grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
 }
 
 @media (max-width: 880px) {
-  .page-hero { padding: 124px 0 40px; }  /* 헤더가 72px가 됨 */
+  .page-hero { padding: 52px 0 40px; }  /* 헤더 in-flow 72px */
   .page-hero__title { font-size: 44px; }
   .page-hero__lead { font-size: 15px; }
 
@@ -322,7 +322,7 @@
 }
 
 @media (max-width: 640px) {
-  .page-hero { padding: 110px 0 36px; }
+  .page-hero { padding: 38px 0 36px; }
   .page-hero__title { font-size: 34px; }
 
   .theme-list__grid { grid-template-columns: 1fr; gap: 18px; }

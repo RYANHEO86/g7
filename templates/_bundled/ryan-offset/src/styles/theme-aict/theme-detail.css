@@ -13,7 +13,7 @@
 
 /* ---------- 상단 브레드크럼 영역 ------------------------------ */
 .detail-top {
-  padding: 120px 0 28px;  /* 88px 헤더 + 32px 여유 */
+  padding: 32px 0 28px;  /* 헤더가 in-flow(88px)로 높이를 차지하므로 여유분만 */
   background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
@@ -224,7 +224,7 @@
 /* ---------- RIGHT: STICKY 구매 박스 -------------------------- */
 .detail-aside {
   position: sticky;
-  top: 108px;  /* 헤더 88px + 20px 여유 */
+  top: 20px;  /* 헤더가 in-flow로 흐르므로 뷰포트 기준 여유분만 */
   align-self: start;
 }
 .buy-card {
@@ -702,7 +702,7 @@
 }
 
 @media (max-width: 720px) {
-  .detail-top { padding: 100px 0 22px; }
+  .detail-top { padding: 28px 0 22px; }
   .detail-main { padding: 28px 0 56px; }
 
   .gallery__main { aspect-ratio: 16 / 10; border-radius: var(--r-md); }
