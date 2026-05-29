@@ -224,4 +224,34 @@
   .contact .contact-intro { font-size: 17px; }
 }
 
+/* ── 문의 작성 폼 (board/qna_write) 사이트 톤 ──
+   폼 본체는 공용 partial 이라 .qna-write 스코프로만 오버라이드.
+   CKEditor(.ck-*) 내부는 건드리지 않음 */
+.qna-write .rounded-lg.shadow {
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-1);
+}
+.qna-write input:not([type="checkbox"]):not([type="radio"]),
+.qna-write select {
+  border-radius: 12px;
+}
+.qna-write input:not([type="checkbox"]):not([type="radio"]):focus,
+.qna-write select:focus,
+.qna-write textarea:focus {
+  outline: none;
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 3px rgba(0, 162, 105, 0.15) !important;
+  --tw-ring-color: transparent !important;
+}
+/* 카테고리 드롭다운 버튼(커스텀 select) 톤 */
+.qna-write button.rounded-lg:focus,
+.qna-write [class*="border"][class*="rounded-lg"]:focus-within {
+  border-color: var(--brand) !important;
+}
+/* 등록/취소 버튼 pill */
+.qna-write button[type="submit"] {
+  border-radius: 999px !important;
+}
+
 }

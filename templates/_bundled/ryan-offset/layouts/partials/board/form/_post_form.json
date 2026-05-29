@@ -676,9 +676,9 @@
               "temp_key": "{{_local.tempKey}}"
             },
             "apiEndpoints": {
-              "upload": "/api/modules/sirsoft-board/boards/{{route.slug}}/attachments",
-              "delete": "/api/modules/sirsoft-board/boards/{{route.slug}}/attachments/:id",
-              "reorder": "/api/modules/sirsoft-board/boards/{{route.slug}}/attachments/reorder"
+              "upload": "/api/modules/sirsoft-board/boards/{{route.slug ? route.slug : form_meta?.data?.board?.slug}}/attachments",
+              "delete": "/api/modules/sirsoft-board/boards/{{route.slug ? route.slug : form_meta?.data?.board?.slug}}/attachments/:id",
+              "reorder": "/api/modules/sirsoft-board/boards/{{route.slug ? route.slug : form_meta?.data?.board?.slug}}/attachments/reorder"
             }
           },
           "actions": [
@@ -740,7 +740,7 @@
               "type": "click",
               "handler": "navigate",
               "params": {
-                "path": "{{route.id ? '/board/' + route.slug + '/' + route.id : '/board/' + route.slug}}"
+                "path": "{{route.id ? '/board/' + (route.slug ? route.slug : form_meta?.data?.board?.slug) + '/' + route.id : '/board/' + (route.slug ? route.slug : form_meta?.data?.board?.slug)}}"
               }
             }
           ],
@@ -775,7 +775,7 @@
                 },
                 {
                   "handler": "apiCall",
-                  "target": "{{route.id ? '/api/modules/sirsoft-board/boards/' + route.slug + '/posts/' + route.id : '/api/modules/sirsoft-board/boards/' + route.slug + '/posts'}}",
+                  "target": "{{route.id ? '/api/modules/sirsoft-board/boards/' + (route.slug ? route.slug : form_meta?.data?.board?.slug) + '/posts/' + route.id : '/api/modules/sirsoft-board/boards/' + (route.slug ? route.slug : form_meta?.data?.board?.slug) + '/posts'}}",
                   "auth_required": true,
                   "params": {
                     "method": "{{route.id ? 'PUT' : 'POST'}}",
@@ -801,7 +801,7 @@
                     {
                       "handler": "navigate",
                       "params": {
-                        "path": "/board/{{route?.slug}}/{{result?.data?.id}}"
+                        "path": "/board/{{route?.slug ? route?.slug : form_meta?.data?.board?.slug}}/{{result?.data?.id}}"
                       }
                     }
                   ],
