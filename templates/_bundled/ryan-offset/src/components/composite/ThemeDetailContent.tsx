@@ -9,6 +9,8 @@ export interface ThemeDetailContentProps {
   id?: number | string;
   /** 카테고리 (BUSINESS 등) */
   category?: string;
+  /** 호환 빌더 코드 (rebuilder 등) */
+  builder?: string;
   /** 글 제목 (= 테마명) */
   title: string;
   /** 한 줄 요약 — buy-card 와 본문 상단에 사용 */
@@ -65,6 +67,7 @@ const renderHtmlBR = (text: string) =>
 const ThemeDetailContent: React.FC<ThemeDetailContentProps> = ({
   id,
   category,
+  builder,
   title,
   summary,
   description,
@@ -179,6 +182,7 @@ const ThemeDetailContent: React.FC<ThemeDetailContentProps> = ({
           <aside className="detail-aside">
             <BuyCardSticky
               category={category}
+              builder={builder}
               title={title}
               summary={summary}
               price={price}

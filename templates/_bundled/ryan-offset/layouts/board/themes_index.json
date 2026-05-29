@@ -95,7 +95,7 @@
             "name": "ThemeListSection",
             "props": {
               "categories": "{{[{key:'all', label:'전체'}].concat(((posts.data.board.categories ?? []).map(c => ({key: c, label: c}))))}}",
-              "posts": "{{(posts.data.data ?? []).map(p => ({id: p.id, title: p.title, summary: ((themeMetas.data ?? []).find(x => x.post_id === p.id)?.description_short ?? ''), thumbnail: (p.thumbnail ?? ''), category: (p.category ?? ''), price: ((themeMetas.data ?? []).find(x => x.post_id === p.id)?.price ?? 0), href: '/board/theme/' + p.id}))}}",
+              "posts": "{{(posts.data.data ?? []).map(p => ({id: p.id, title: p.title, summary: ((themeMetas.data ?? []).find(x => x.post_id === p.id)?.description_short ?? ''), thumbnail: (p.thumbnail ?? ''), category: (p.category ?? ''), price: ((themeMetas.data ?? []).find(x => x.post_id === p.id)?.price ?? 0), builder: ((themeMetas.data ?? []).find(x => x.post_id === p.id)?.builder ?? 'rebuilder'), href: '/board/theme/' + p.id}))}}",
               "perPage": 12,
               "baseHref": "/board/theme"
             }

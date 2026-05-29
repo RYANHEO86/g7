@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Div, Section, Ul, Li, A, Span, P, H2, H3, Button, Form, Input, Select, Option, Img, Nav, Ol, Label } from '../basic';
+import BuilderBadge from './BuilderBadge';
 
 export interface ThemeCardItem {
   id: number | string;
@@ -9,6 +10,7 @@ export interface ThemeCardItem {
   category?: string;
   price?: number | string;
   href?: string;
+  builder?: string;
 }
 
 export interface ThemeCategoryDef {
@@ -176,6 +178,7 @@ const ThemeListSection: React.FC<ThemeListSectionProps> = ({
                 <A href={p.href ?? `${baseHref}/${p.id}`} className="theme-card__link">
                   <Div className="theme-card__media">
                     {p.thumbnail && <Img src={p.thumbnail} alt={`${p.title} 미리보기`} loading="lazy" />}
+                    <BuilderBadge builder={p.builder} className="builder-badge--float" />
                     <Div className="theme-card__hover">
                       <Span className="theme-card__cta"><em>미리보기</em> →</Span>
                     </Div>

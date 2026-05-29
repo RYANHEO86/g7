@@ -10,6 +10,7 @@ class ThemePostMetaResource extends JsonResource
     {
         return [
             'post_id' => $this->post_id,
+            'builder' => $this->builder ?? 'rebuilder',
             'price' => $this->price,
             'license' => $this->license,
             'description_short' => $this->description_short,

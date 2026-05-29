@@ -1,5 +1,6 @@
 import React from 'react';
 import { Div, Span, P, H2, A, Ul, Li } from '../basic';
+import BuilderBadge from './BuilderBadge';
 
 export interface SpecRow {
   label: string;
@@ -8,6 +9,7 @@ export interface SpecRow {
 
 export interface BuyCardStickyProps {
   category?: string;
+  builder?: string;
   title: string;
   summary?: string;
   rating?: number;
@@ -37,6 +39,7 @@ const formatPrice = (p: number | string | undefined) => {
  */
 const BuyCardSticky: React.FC<BuyCardStickyProps> = ({
   category,
+  builder,
   title,
   summary,
   rating = 0,
@@ -53,7 +56,10 @@ const BuyCardSticky: React.FC<BuyCardStickyProps> = ({
 
   return (
     <Div className="buy-card">
-      {category && <Span className="buy-card__tag">{category}</Span>}
+      <Div className="buy-card__tags">
+        {category && <Span className="buy-card__tag">{category}</Span>}
+        <BuilderBadge builder={builder} />
+      </Div>
       <H2 className="buy-card__title">{title}</H2>
       {summary && <P className="buy-card__sub">{summary}</P>}
 

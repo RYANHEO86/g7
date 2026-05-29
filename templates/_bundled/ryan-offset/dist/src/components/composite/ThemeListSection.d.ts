@@ -7,6 +7,7 @@ export interface ThemeCardItem {
     category?: string;
     price?: number | string;
     href?: string;
+    builder?: string;
 }
 export interface ThemeCategoryDef {
     key: string;

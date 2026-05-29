@@ -9,7 +9,7 @@ class ThemePostMeta extends Model
     protected $table = 'theme_post_metas';
 
     protected $fillable = [
-        'post_id', 'price', 'license', 'description_short', 'description_long',
+        'post_id', 'builder', 'price', 'license', 'description_short', 'description_long',
         'features', 'changelog', 'demo_url', 'purchase_url', 'download_count',
         'last_update', 'install_note', 'min_requirement', 'rating', 'review_count',
     ];

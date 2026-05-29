@@ -10,7 +10,7 @@ class ThemePostMetaService
 {
     /** 게시글 데이터에서 분리해 별도 저장하는 메타 필드. */
     public const META_KEYS = [
-        'price', 'license', 'description_short', 'description_long', 'features',
+        'builder', 'price', 'license', 'description_short', 'description_long', 'features',
         'changelog', 'demo_url', 'purchase_url', 'download_count', 'last_update',
         'install_note', 'min_requirement', 'rating', 'review_count',
     ];

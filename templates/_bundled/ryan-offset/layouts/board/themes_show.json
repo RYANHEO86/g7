@@ -97,6 +97,7 @@
             "props": {
               "id": "{{post.data.id}}",
               "category": "{{post.data.category ?? ''}}",
+              "builder": "{{themeMeta.data?.builder ?? 'rebuilder'}}",
               "title": "{{post.data.title ?? ''}}",
               "summary": "{{themeMeta.data?.description_short ?? ''}}",
               "description": "{{themeMeta.data?.description_long ?? post.data.content ?? ''}}",

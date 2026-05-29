@@ -1,5 +1,6 @@
 import React from 'react';
 import { Div, Section, Ul, Li, A, Span, P, H2, H3, Img } from '../basic';
+import BuilderBadge from './BuilderBadge';
 
 export interface ThemeCard {
   id?: number | string;
@@ -9,6 +10,7 @@ export interface ThemeCard {
   price?: number | string;
   summary?: string;
   href: string;
+  builder?: string;
 }
 
 export interface ThemesSectionProps {
@@ -49,6 +51,7 @@ const ThemesSection: React.FC<ThemesSectionProps> = ({ posts = EMPTY_POSTS }) =>
                     {c.thumbnail ? (
                       <Img src={c.thumbnail} alt={`${c.title} 미리보기`} loading="lazy" />
                     ) : null}
+                    <BuilderBadge builder={c.builder} className="builder-badge--float" />
                     <Span className="theme-card__hover" aria-hidden="true">
                       <Span className="theme-card__cta">
                         데모 보기 <em>→</em>

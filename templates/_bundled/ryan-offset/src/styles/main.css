@@ -250,3 +250,8 @@
  */
 @import './pricing.css';
 
+/**
+ * 테마 호환 빌더 배지 (BuilderBadge)
+ */
+@import './builder-badge.css';
+

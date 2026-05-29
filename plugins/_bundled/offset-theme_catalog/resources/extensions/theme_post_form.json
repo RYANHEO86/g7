@@ -38,6 +38,21 @@
                 {
                   "type": "basic", "name": "Div",
                   "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["호환 빌더"] },
+                    { "type": "basic", "name": "Select",
+                      "props": { "value": "{{_local.form?.builder ?? meta?.data?.builder ?? 'rebuilder'}}", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "builder": "{{$event.target.value}}" }, "hasChanges": true } } ],
+                      "children": [
+                        { "type": "basic", "name": "Option", "props": { "value": "rebuilder" }, "children": ["리빌더"] },
+                        { "type": "basic", "name": "Option", "props": { "value": "gnuboard5" }, "children": ["그누보드5"] },
+                        { "type": "basic", "name": "Option", "props": { "value": "amina" }, "children": ["아미나빌더"] }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
                     { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["가격 (원)"] },
                     { "type": "basic", "name": "Input",
                       "props": { "type": "number", "min": 0, "step": 1000, "value": "{{_local.form?.price ?? meta?.data?.price ?? ''}}", "placeholder": "예: 89000", "className": "input w-full" },

@@ -5,6 +5,7 @@ export interface SpecRow {
 }
 export interface BuyCardStickyProps {
     category?: string;
+    builder?: string;
     title: string;
     summary?: string;
     rating?: number;

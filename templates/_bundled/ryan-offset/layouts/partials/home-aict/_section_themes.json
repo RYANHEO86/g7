@@ -6,6 +6,6 @@
   "type": "composite",
   "name": "ThemesSection",
   "props": {
-    "posts": "{{(themePosts.data.data ?? []).map(p => ({ id: p.id, title: (p.title ?? ''), tag: (p.category ?? ''), thumbnail: (p.thumbnail ?? ''), summary: ((themeMetas.data ?? []).find(m => m.post_id === p.id)?.description_short ?? ''), price: ((themeMetas.data ?? []).find(m => m.post_id === p.id)?.price ?? ''), href: '/board/theme/' + p.id }))}}"
+    "posts": "{{(themePosts.data.data ?? []).map(p => ({ id: p.id, title: (p.title ?? ''), tag: (p.category ?? ''), thumbnail: (p.thumbnail ?? ''), summary: ((themeMetas.data ?? []).find(m => m.post_id === p.id)?.description_short ?? ''), price: ((themeMetas.data ?? []).find(m => m.post_id === p.id)?.price ?? ''), builder: ((themeMetas.data ?? []).find(m => m.post_id === p.id)?.builder ?? 'rebuilder'), href: '/board/theme/' + p.id }))}}"
   }
 }
