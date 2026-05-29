@@ -1,0 +1,13 @@
+{
+    "name": "plugins/offset-theme_catalog",
+    "description": "Theme catalog meta plugin for Gnuboard7 platform by offset",
+    "type": "library",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plugins\\Offset\\ThemeCatalog\\": ["src/", "./"]
+        }
+    }
+}

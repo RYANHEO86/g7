@@ -1,0 +1,16 @@
+{
+    "identifier": "offset-theme_catalog",
+    "vendor": "offset",
+    "name": { "ko": "테마 카탈로그", "en": "Theme Catalog" },
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": {
+        "ko": "theme 게시판 게시글에 카탈로그 메타(가격·라이선스 등)를 더합니다.",
+        "en": "Adds catalog meta (price, license, etc.) to theme board posts."
+    },
+    "g7_version": ">=7.0.0-beta.5",
+    "dependencies": {
+        "modules": { "sirsoft-board": ">=1.0.0" },
+        "plugins": {}
+    }
+}
