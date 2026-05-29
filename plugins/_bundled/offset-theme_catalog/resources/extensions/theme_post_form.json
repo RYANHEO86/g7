@@ -1,0 +1,191 @@
+{
+  "target_layout": "admin_board_post_form",
+  "injections": [
+    {
+      "target_id": "form_content",
+      "position": "append_child",
+      "components": [
+        {
+          "id": "theme_catalog_meta_card",
+          "type": "basic",
+          "name": "Div",
+          "if": "{{form_meta?.data?.board?.slug == 'theme'}}",
+          "props": { "className": "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 space-y-6" },
+          "children": [
+            {
+              "type": "basic",
+              "name": "Div",
+              "props": { "className": "flex items-center justify-between" },
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "H3",
+                  "props": { "className": "text-base font-semibold text-gray-900 dark:text-white" },
+                  "children": ["테마 카탈로그 정보"]
+                },
+                {
+                  "type": "composite",
+                  "name": "ExtensionBadge",
+                  "props": { "type": "plugin", "identifier": "offset-theme_catalog", "installedModules": "{{_global.installedModules}}" }
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "props": { "className": "grid grid-cols-1 md:grid-cols-2 gap-4" },
+              "children": [
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["가격 (원)"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "number", "min": 0, "step": 1000, "value": "{{_local.form?.price ?? meta?.data?.price ?? ''}}", "placeholder": "예: 89000", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "price": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["라이센스"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "text", "value": "{{_local.form?.license ?? meta?.data?.license ?? ''}}", "placeholder": "예: 1도메인 / 자사용", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "license": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["데모 URL"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "url", "value": "{{_local.form?.demo_url ?? meta?.data?.demo_url ?? ''}}", "placeholder": "https://...", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "demo_url": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["구매 URL"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "url", "value": "{{_local.form?.purchase_url ?? meta?.data?.purchase_url ?? ''}}", "placeholder": "https://...", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "purchase_url": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["최소 요구"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "text", "value": "{{_local.form?.min_requirement ?? meta?.data?.min_requirement ?? ''}}", "placeholder": "예: 그누보드 2.2.6.1+", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "min_requirement": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["마지막 업데이트 (YYYY-MM-DD)"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "text", "value": "{{_local.form?.last_update ?? meta?.data?.last_update ?? ''}}", "placeholder": "2026-05-18", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "last_update": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["다운로드 횟수"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "number", "min": 0, "value": "{{_local.form?.download_count ?? meta?.data?.download_count ?? ''}}", "placeholder": "0", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "download_count": "{{Number($event.target.value) || 0}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["평점 (0~5)"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "number", "min": 0, "max": 5, "step": 0.1, "value": "{{_local.form?.rating ?? meta?.data?.rating ?? ''}}", "placeholder": "5.0", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "rating": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["리뷰 수"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "number", "min": 0, "value": "{{_local.form?.review_count ?? meta?.data?.review_count ?? ''}}", "placeholder": "0", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "review_count": "{{Number($event.target.value) || 0}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "props": { "className": "md:col-span-2" },
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["한 줄 설명 (카드 + 상세 상단)"] },
+                    { "type": "basic", "name": "Input",
+                      "props": { "type": "text", "value": "{{_local.form?.description_short ?? meta?.data?.description_short ?? ''}}", "placeholder": "예: 스타트업·중소기업을 위한 클린한 비즈니스 테마", "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "description_short": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "props": { "className": "md:col-span-2" },
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["상세 설명 (긴 본문)"] },
+                    { "type": "basic", "name": "Textarea",
+                      "props": { "value": "{{_local.form?.description_long ?? meta?.data?.description_long ?? ''}}", "placeholder": "여러 단락 입력 가능.", "rows": 6, "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "description_long": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "props": { "className": "md:col-span-2" },
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["설치 안내"] },
+                    { "type": "basic", "name": "Textarea",
+                      "props": { "value": "{{_local.form?.install_note ?? meta?.data?.install_note ?? ''}}", "placeholder": "압축을 해제한 후 ...", "rows": 3, "className": "input w-full" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "install_note": "{{$event.target.value}}" }, "hasChanges": true } } ] }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic", "name": "Div",
+              "props": { "className": "border-t border-gray-200 dark:border-gray-700 pt-6 space-y-6" },
+              "children": [
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["포함 구성 (features) — JSON 문자열 배열"] },
+                    { "type": "basic", "name": "Textarea",
+                      "props": { "value": "{{JSON.stringify(_local.form?.features ?? meta?.data?.features ?? [], null, 2)}}", "placeholder": "[\n  \"메인 페이지 1종\"\n]", "rows": 5, "className": "input w-full font-mono text-xs" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "features": "{{(() => { try { return JSON.parse($event.target.value); } catch(e) { return _local.form?.features ?? []; } })()}}" }, "hasChanges": true } } ] }
+                  ]
+                },
+                {
+                  "type": "basic", "name": "Div",
+                  "children": [
+                    { "type": "basic", "name": "Label", "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" }, "children": ["업데이트 히스토리 (changelog) — JSON [{version,date,changes:[]}]"] },
+                    { "type": "basic", "name": "Textarea",
+                      "props": { "value": "{{JSON.stringify(_local.form?.changelog ?? meta?.data?.changelog ?? [], null, 2)}}", "placeholder": "[\n  { \"version\": \"v1.0.0\", \"date\": \"2026-05-18\", \"changes\": [\"최초 릴리스\"] }\n]", "rows": 8, "className": "input w-full font-mono text-xs" },
+                      "actions": [ { "event": "onChange", "type": "change", "handler": "setState", "params": { "target": "local", "form": { "changelog": "{{(() => { try { return JSON.parse($event.target.value); } catch(e) { return _local.form?.changelog ?? []; } })()}}" }, "hasChanges": true } } ] }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "data_sources": [
+    {
+      "id": "meta",
+      "type": "api",
+      "method": "GET",
+      "endpoint": "/api/plugins/offset-theme_catalog/posts/{{route.id}}/meta",
+      "auto_fetch": "{{!!route.id}}",
+      "auth_required": false
+    }
+  ],
+  "priority": 200
+}
