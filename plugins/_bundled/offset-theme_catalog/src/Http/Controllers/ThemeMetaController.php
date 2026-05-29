@@ -4,6 +4,7 @@ namespace Plugins\Offset\ThemeCatalog\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Api\Base\PublicBaseController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Plugins\Offset\ThemeCatalog\Http\Resources\ThemePostMetaResource;
 use Plugins\Offset\ThemeCatalog\Services\ThemePostMetaService;
@@ -20,7 +21,7 @@ class ThemeMetaController extends PublicBaseController
     }
 
     /** 단건 메타 (상세 화면용). */
-    public function show(int $postId)
+    public function show(int $postId): JsonResponse
     {
         $meta = $this->service->getByPostId($postId);
 
@@ -28,7 +29,7 @@ class ThemeMetaController extends PublicBaseController
     }
 
     /** 다건 메타 (목록 카드용). post_ids=1,2,3 */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $idsParam = (string) $request->query('post_ids');
         if ($idsParam !== '') {
