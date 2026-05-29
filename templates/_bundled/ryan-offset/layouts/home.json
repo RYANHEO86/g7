@@ -58,9 +58,6 @@
             "partial": "partials/home-aict/_section_notice.json"
           },
           {
-            "partial": "partials/home-aict/_section_research.json"
-          },
-          {
             "partial": "partials/home-aict/_section_glance.json"
           },
           {
