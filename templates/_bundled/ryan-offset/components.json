@@ -233,6 +233,19 @@
         }
       },
       {
+        "name": "Section",
+        "type": "basic",
+        "description": "HTML section element wrapper",
+        "path": "src/components/basic/Section.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
         "name": "Span",
         "type": "basic",
         "description": "HTML span element wrapper",

@@ -24,6 +24,15 @@
     {
       "handler": "setState",
       "params": {
+        "target": "global",
+        "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+        "hideDefaultHeader": true,
+        "hideDefaultFooter": true
+      }
+    },
+    {
+      "handler": "setState",
+      "params": {
         "target": "local",
         "isRegistering": false,
         "registerError": null,
@@ -35,84 +44,62 @@
   "slots": {
     "content": [
       {
-        "type": "layout",
-        "name": "Flex",
-        "blur_until_loaded": "{{_global?.currentUser?.uuid}}",
-        "props": {
-          "justify": "center",
-          "className": "min-h-[60vh] py-12"
-        },
+        "type": "basic",
+        "name": "Div",
+        "props": { "className": "aict-home" },
         "children": [
+          { "partial": "partials/theme-aict/_subpage_header.json" },
           {
-            "partial": "partials/auth/_redirect_if_logged_in.json"
-          },
-          {
-            "comment": "회원가입 폼",
             "type": "basic",
-            "name": "Div",
-            "props": {
-              "className": "w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-lg shadow"
-            },
+            "name": "Section",
+            "props": { "className": "auth-section" },
             "children": [
               {
-                "type": "basic",
-                "name": "H2",
-                "props": {
-                  "className": "text-2xl font-bold text-gray-900 dark:text-white mb-6"
-                },
-                "text": "$t:auth.register.title"
-              },
-              {
-                "partial": "partials/auth/_register_form.json"
-              },
-              {
-                "type": "basic",
-                "name": "Div",
-                "props": {
-                  "className": "mt-6 text-center text-sm text-gray-600 dark:text-gray-400"
-                },
+                "type": "layout",
+                "name": "Flex",
+                "blur_until_loaded": "{{_global?.currentUser?.uuid}}",
+                "props": { "justify": "center", "align": "start" },
                 "children": [
+                  { "partial": "partials/auth/_redirect_if_logged_in.json" },
                   {
+                    "comment": "회원가입 카드",
                     "type": "basic",
-                    "name": "Span",
-                    "text": "$t:auth.already_member"
-                  },
-                  {
-                    "type": "basic",
-                    "name": "Span",
-                    "text": " "
-                  },
-                  {
-                    "type": "basic",
-                    "name": "Button",
-                    "props": {
-                      "className": "text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
-                    },
-                    "actions": [
+                    "name": "Div",
+                    "props": { "className": "auth-card" },
+                    "children": [
+                      { "partial": "partials/auth/_register_form.json" },
                       {
-                        "type": "click",
-                        "handler": "navigate",
-                        "params": {
-                          "path": "/login"
-                        }
+                        "comment": "하단 링크 (이미 회원이신가요? 로그인)",
+                        "type": "basic",
+                        "name": "Div",
+                        "props": { "className": "auth-foot" },
+                        "children": [
+                          { "type": "basic", "name": "Span", "text": "$t:auth.already_member" },
+                          { "type": "basic", "name": "Span", "text": " " },
+                          {
+                            "type": "basic",
+                            "name": "Button",
+                            "props": { "type": "button", "className": "auth-link auth-link--accent" },
+                            "actions": [
+                              { "type": "click", "handler": "navigate", "params": { "path": "/login" } }
+                            ],
+                            "text": "$t:auth.login"
+                          }
+                        ]
                       }
-                    ],
-                    "text": "$t:auth.login"
+                    ]
                   }
                 ]
               }
             ]
-          }
+          },
+          { "partial": "partials/home-aict/_aict_footer.json" }
         ]
       }
     ]
   },
   "modals": [
-    {
-      "partial": "partials/auth/_modal_terms.json"
-    },
-    {
-      "partial": "partials/auth/_modal_privacy.json"
-    }
+    { "partial": "partials/auth/_modal_terms.json" },
+    { "partial": "partials/auth/_modal_privacy.json" }
   ]
 }

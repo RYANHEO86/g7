@@ -65,7 +65,7 @@
       "name": "Div",
       "if": "{{_local?.registerError}}",
       "props": {
-        "className": "p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+        "className": "auth-error-box"
       },
       "children": [
         {
@@ -87,7 +87,7 @@
           "type": "basic",
           "name": "Label",
           "props": {
-            "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            "className": "auth-label"
           },
           "children": [
             {
@@ -99,7 +99,7 @@
               "type": "basic",
               "name": "Span",
               "props": {
-                "className": "text-red-500 ml-1"
+                "className": "auth-required"
               },
               "text": "*"
             }
@@ -112,7 +112,7 @@
             "type": "email",
             "name": "email",
             "placeholder": "$t:auth.email_placeholder",
-            "className": "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            "className": "auth-input",
             "required": true,
             "disabled": "{{_local?.isRegistering}}"
           }
@@ -137,7 +137,7 @@
           "type": "basic",
           "name": "Label",
           "props": {
-            "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            "className": "auth-label"
           },
           "children": [
             {
@@ -149,7 +149,7 @@
               "type": "basic",
               "name": "Span",
               "props": {
-                "className": "text-red-500 ml-1"
+                "className": "auth-required"
               },
               "text": "*"
             }
@@ -161,7 +161,7 @@
           "props": {
             "name": "password",
             "placeholder": "$t:auth.register.password_placeholder|count=8",
-            "className": "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            "className": "auth-input",
             "required": true,
             "disabled": "{{_local?.isRegistering}}",
             "showToggle": true,
@@ -183,7 +183,7 @@
           "type": "basic",
           "name": "Label",
           "props": {
-            "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            "className": "auth-label"
           },
           "children": [
             {
@@ -195,7 +195,7 @@
               "type": "basic",
               "name": "Span",
               "props": {
-                "className": "text-red-500 ml-1"
+                "className": "auth-required"
               },
               "text": "*"
             }
@@ -207,7 +207,7 @@
           "props": {
             "name": "password_confirmation",
             "placeholder": "$t:auth.password_confirm_placeholder",
-            "className": "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            "className": "auth-input",
             "required": true,
             "disabled": "{{_local?.isRegistering}}",
             "showToggle": true,
@@ -227,7 +227,7 @@
           "type": "basic",
           "name": "Label",
           "props": {
-            "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            "className": "auth-label"
           },
           "children": [
             {
@@ -239,7 +239,7 @@
               "type": "basic",
               "name": "Span",
               "props": {
-                "className": "text-red-500 ml-1"
+                "className": "auth-required"
               },
               "text": "*"
             }
@@ -252,7 +252,7 @@
             "type": "text",
             "name": "name",
             "placeholder": "$t:auth.name_placeholder",
-            "className": "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            "className": "auth-input",
             "required": true,
             "disabled": "{{_local?.isRegistering}}"
           }
@@ -277,7 +277,7 @@
           "type": "basic",
           "name": "Label",
           "props": {
-            "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            "className": "auth-label"
           },
           "text": "$t:auth.nickname"
         },
@@ -288,7 +288,7 @@
             "type": "text",
             "name": "nickname",
             "placeholder": "$t:auth.nickname_placeholder",
-            "className": "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            "className": "auth-input",
             "disabled": "{{_local?.isRegistering}}"
           }
         },
@@ -312,7 +312,7 @@
           "type": "basic",
           "name": "Label",
           "props": {
-            "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            "className": "auth-label"
           },
           "text": "$t:auth.language"
         },
@@ -322,7 +322,7 @@
           "props": {
             "name": "language",
             "options": "{{($locales ?? []).map(l => ({ value: l, label: _global.appConfig?.localeNames?.[l] ?? l }))}}",
-            "className": "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            "className": "auth-input",
             "disabled": "{{_local?.isRegistering}}"
           }
         }
@@ -369,7 +369,7 @@
                       "name": "Button",
                       "props": {
                         "type": "button",
-                        "className": "text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                        "className": "auth-link auth-link--accent"
                       },
                       "actions": [
                         {
@@ -445,7 +445,7 @@
                       "name": "Button",
                       "props": {
                         "type": "button",
-                        "className": "text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                        "className": "auth-link auth-link--accent"
                       },
                       "actions": [
                         {
@@ -494,7 +494,7 @@
       "name": "Button",
       "props": {
         "type": "submit",
-        "className": "w-full py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2",
+        "className": "auth-submit",
         "disabled": "{{_local?.isRegistering}}"
       },
       "children": [

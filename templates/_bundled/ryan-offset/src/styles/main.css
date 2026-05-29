@@ -235,3 +235,8 @@
  */
 @import './theme-aict/index.css';
 
+/**
+ * 인증 화면 (로그인/회원가입)
+ */
+@import './auth/index.css';
+

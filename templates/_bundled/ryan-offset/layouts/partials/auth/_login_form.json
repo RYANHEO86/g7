@@ -13,7 +13,7 @@
       "name": "Div",
       "if": "{{_global.loginError}}",
       "props": {
-        "className": "p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+        "className": "auth-error-box"
       },
       "children": [
         {
@@ -32,7 +32,7 @@
         {
           "type": "basic",
           "name": "Label",
-          "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3" },
+          "props": { "className": "auth-label" },
           "text": "$t:auth.email"
         },
         {
@@ -42,7 +42,7 @@
             "type": "email",
             "name": "email",
             "placeholder": "$t:auth.email_placeholder",
-            "className": "{{_global.loginErrors?.email ? 'w-full px-4 py-2 border border-red-500 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 focus:border-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200' : 'w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200'}}",
+            "className": "{{_global.loginErrors?.email ? 'auth-input auth-input--error' : 'auth-input'}}",
             "required": true,
             "disabled": "{{_global.isLoggingIn}}"
           }
@@ -65,7 +65,7 @@
         {
           "type": "basic",
           "name": "Label",
-          "props": { "className": "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3" },
+          "props": { "className": "auth-label" },
           "text": "$t:auth.password"
         },
         {
@@ -74,7 +74,7 @@
           "props": {
             "name": "password",
             "placeholder": "$t:auth.password_placeholder",
-            "className": "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200",
+            "className": "auth-input",
             "required": true,
             "disabled": "{{_global.isLoggingIn}}",
             "showToggle": true,
@@ -88,7 +88,7 @@
       "name": "Button",
       "props": {
         "type": "submit",
-        "className": "w-full py-3 mt-12 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2",
+        "className": "auth-submit",
         "disabled": "{{_global.isLoggingIn}}"
       },
       "children": [
