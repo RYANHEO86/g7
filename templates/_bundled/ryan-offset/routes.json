@@ -125,6 +125,14 @@
     },
 
     {
+      "_comment": "=== 가격 ===",
+      "path": "/pricing",
+      "layout": "pricing/index",
+      "auth_required": false,
+      "meta": { "title": "가격" }
+    },
+
+    {
       "_comment": "=== 제작의뢰 ===",
       "path": "/inquiry",
       "layout": "inquiry/index",

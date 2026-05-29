@@ -82,6 +82,7 @@ export { default as ChangelogTimeline } from './ChangelogTimeline';
 export type { ChangelogTimelineProps, ChangelogEntry } from './ChangelogTimeline';
 export { default as ThemeDetailContent } from './ThemeDetailContent';
 export type { ThemeDetailContentProps } from './ThemeDetailContent';
+export { default as PricingSection } from './PricingSection';
 
 // 제작의뢰 (sirsoft-inquiry) 전용
 export { default as InquiryStatusBar } from './InquiryStatusBar';
@@ -163,6 +164,7 @@ export const compositeComponents = {
   GlanceSection: () => import('./GlanceSection'),
   SnsSection: () => import('./SnsSection'),
   AictFooter: () => import('./AictFooter'),
+  PricingSection: () => import('./PricingSection'),
 
   // 테마 게시판 (slug=theme) 전용
   ThemeListSection: () => import('./ThemeListSection'),

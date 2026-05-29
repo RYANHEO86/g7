@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "layout_name": "pricing/index",
+  "permissions": [],
+  "extends": "_user_base",
+  "meta": {
+    "seo": {
+      "enabled": true,
+      "page_type": "default",
+      "vars": { "site_name": "$core_settings:general.site_name" }
+    }
+  },
+  "init_actions": [
+    {
+      "handler": "setState",
+      "params": {
+        "target": "global",
+        "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+        "hideDefaultHeader": true,
+        "hideDefaultFooter": true
+      }
+    }
+  ],
+  "data_sources": [],
+  "slots": {
+    "content": [
+      {
+        "type": "basic",
+        "name": "Div",
+        "props": { "className": "aict-home" },
+        "children": [
+          { "partial": "partials/theme-aict/_subpage_header.json" },
+          {
+            "type": "composite",
+            "name": "RevealScrollManager",
+            "props": {}
+          },
+          {
+            "type": "composite",
+            "name": "PageHeader",
+            "props": { "title": "가격" }
+          },
+          {
+            "type": "composite",
+            "name": "PricingSection",
+            "props": {}
+          },
+          { "partial": "partials/home-aict/_aict_footer.json" }
+        ]
+      }
+    ]
+  }
+}

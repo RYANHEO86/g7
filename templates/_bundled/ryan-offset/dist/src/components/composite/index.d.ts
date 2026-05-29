@@ -66,6 +66,7 @@ export { default as ChangelogTimeline } from './ChangelogTimeline';
 export type { ChangelogTimelineProps, ChangelogEntry } from './ChangelogTimeline';
 export { default as ThemeDetailContent } from './ThemeDetailContent';
 export type { ThemeDetailContentProps } from './ThemeDetailContent';
+export { default as PricingSection } from './PricingSection';
 export { default as InquiryStatusBar } from './InquiryStatusBar';
 export type { InquiryStatusBarProps } from './InquiryStatusBar';
 export { default as InquiryCard } from './InquiryCard';
@@ -132,6 +133,7 @@ export declare const compositeComponents: {
     GlanceSection: () => Promise<typeof import("./GlanceSection")>;
     SnsSection: () => Promise<typeof import("./SnsSection")>;
     AictFooter: () => Promise<typeof import("./AictFooter")>;
+    PricingSection: () => Promise<typeof import("./PricingSection")>;
     ThemeListSection: () => Promise<typeof import("./ThemeListSection")>;
     ThemeGalleryViewer: () => Promise<typeof import("./ThemeGalleryViewer")>;
     BuyCardSticky: () => Promise<typeof import("./BuyCardSticky")>;

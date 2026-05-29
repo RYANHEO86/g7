@@ -245,3 +245,8 @@
  */
 @import './page-header.css';
 
+/**
+ * 가격 페이지 (pricing)
+ */
+@import './pricing.css';
+

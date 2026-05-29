@@ -1730,6 +1730,13 @@
         }
       },
       {
+        "name": "PricingSection",
+        "type": "composite",
+        "description": "가격 페이지 — 4티어 플랜 + 옵션 + 비교표 + FAQ + 진단위젯 (정적)",
+        "path": "src/components/composite/PricingSection.tsx",
+        "props": {}
+      },
+      {
         "name": "RevealScrollManager",
         "type": "composite",
         "description": "글로벌 reveal observer — .aict-home .reveal 요소에 viewport 진입 시 is-in-view 토글",
