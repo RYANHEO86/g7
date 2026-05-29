@@ -136,15 +136,6 @@ const ThemeDetailContent: React.FC<ThemeDetailContentProps> = ({
 
   return (
     <Div className="theme-detail">
-      {/* DETAIL TOP — 게시판명 큰 헤딩 (브레드크럼 대신) */}
-      <Section className="detail-top">
-        <Div className="aict-layout">
-          <A href={listHref} className="detail-board-heading" aria-label={`${boardLabel} 목록으로`}>
-            {boardLabel}
-          </A>
-        </Div>
-      </Section>
-
       {/* DETAIL MAIN — 2-column grid */}
       <Section className="detail-main">
         <Div className="aict-layout detail-main__grid">

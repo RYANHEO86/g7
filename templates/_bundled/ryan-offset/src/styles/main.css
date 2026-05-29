@@ -240,3 +240,8 @@
  */
 @import './auth/index.css';
 
+/**
+ * 공통 페이지 대표 타이틀 (PageHeader)
+ */
+@import './page-header.css';
+

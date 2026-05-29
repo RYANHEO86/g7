@@ -13,10 +13,6 @@ export interface ThemeCategoryDef {
     label: string;
 }
 export interface ThemeListSectionProps {
-    /** breadcrumb 제목 */
-    pageTitle?: string;
-    eyebrow?: string;
-    lead?: string;
     /** 카테고리 필터 — { key:'all', label:'전체' } 포함 */
     categories?: ThemeCategoryDef[];
     /** 전체 카드 목록 (서버에서 한 번에 받아 클라이언트 필터/정렬/페이징) */

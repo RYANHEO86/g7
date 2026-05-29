@@ -1,0 +1,21 @@
+/* 공통 페이지 대표 타이틀 (PageHeader) — 페이지 명칭만, 흰 배경 + 하단 구분선 */
+
+.aict-home .page-title-bar {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 28px 0;
+}
+
+.aict-home .page-title-bar__title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+@media (max-width: 640px) {
+  .aict-home .page-title-bar { padding: 18px 0; }
+  .aict-home .page-title-bar__title { font-size: 21px; }
+}

@@ -75,11 +75,13 @@
           },
           {
             "type": "composite",
+            "name": "PageHeader",
+            "props": { "title": "테마" }
+          },
+          {
+            "type": "composite",
             "name": "ThemeListSection",
             "props": {
-              "pageTitle": "테마",
-              "eyebrow": "Theme Collection",
-              "lead": "차세대 기술과 디자인을 융합한 프리미엄 그누보드 테마 컬렉션을 만나보세요.<br>비즈니스, 포트폴리오, 쇼핑몰, 매거진 등 다양한 분야에 최적화된 디자인을 제공합니다.",
               "categories": "{{[{key:'all', label:'전체'}].concat(((posts.data.board.categories ?? []).map(c => ({key: c, label: c}))))}}",
               "posts": "{{(posts.data.data ?? []).map(p => ({id: p.id, title: p.title, summary: (p.extra_data?.description_short ?? ''), thumbnail: (p.thumbnail ?? ''), category: (p.category ?? ''), price: (p.extra_data?.price ?? 0), href: '/board/theme/' + p.id}))}}",
               "perPage": 12,

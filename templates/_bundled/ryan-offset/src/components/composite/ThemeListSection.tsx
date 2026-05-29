@@ -17,10 +17,6 @@ export interface ThemeCategoryDef {
 }
 
 export interface ThemeListSectionProps {
-  /** breadcrumb 제목 */
-  pageTitle?: string;
-  eyebrow?: string;
-  lead?: string;
   /** 카테고리 필터 — { key:'all', label:'전체' } 포함 */
   categories?: ThemeCategoryDef[];
   /** 전체 카드 목록 (서버에서 한 번에 받아 클라이언트 필터/정렬/페이징) */
@@ -55,9 +51,6 @@ const formatPrice = (p: number | string | undefined) => {
  * 데이터는 props.posts(배열) 한 번에 받음 — 클라이언트 사이드 필터/정렬/페이징.
  */
 const ThemeListSection: React.FC<ThemeListSectionProps> = ({
-  pageTitle = '테마',
-  eyebrow = 'Theme Collection',
-  lead = '차세대 기술과 디자인을 융합한 프리미엄 그누보드 테마 컬렉션을 만나보세요.',
   categories = EMPTY_CATS,
   posts = EMPTY_POSTS,
   perPage = 12,
@@ -107,34 +100,6 @@ const ThemeListSection: React.FC<ThemeListSectionProps> = ({
 
   return (
     <Div className="theme-list">
-      {/* PAGE HERO */}
-      <Section className="page-hero" aria-label="페이지 헤더">
-        <Div className="aict-layout page-hero__inner">
-          <Nav className="breadcrumb" aria-label="현재 위치">
-            <Ol className="breadcrumb__list">
-              <Li className="breadcrumb__item">
-                <A href="/">홈</A>
-              </Li>
-              <Li className="breadcrumb__item is-current" aria-current="page">
-                {pageTitle}
-              </Li>
-            </Ol>
-          </Nav>
-          <Div className="page-hero__head">
-            <Span className="eyebrow">{eyebrow}</Span>
-            <H2 className="page-hero__title">{pageTitle}</H2>
-            <P className="page-hero__lead">
-              {lead.split(/<br\s*\/?>/i).map((line, i, arr) => (
-                <React.Fragment key={i}>
-                  {line}
-                  {i < arr.length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </P>
-          </Div>
-        </Div>
-      </Section>
-
       {/* THEME LIST */}
       <Section className="theme-list" aria-label="테마 목록">
         <Div className="aict-layout">

@@ -36,6 +36,7 @@ export { default as PageTransitionIndicator } from './PageTransitionIndicator';
 export { default as PageTransitionBlur } from './PageTransitionBlur';
 export { default as PageSkeleton } from './PageSkeleton';
 export { default as PageLoading } from './PageLoading';
+export { default as PageHeader } from './PageHeader';
 export { default as ThemeToggle } from './ThemeToggle';
 export { Pagination } from './Pagination';
 export { SearchBar } from './SearchBar';

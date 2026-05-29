@@ -75,6 +75,11 @@
           },
           {
             "type": "composite",
+            "name": "PageHeader",
+            "props": { "title": "테마" }
+          },
+          {
+            "type": "composite",
             "name": "ThemeDetailContent",
             "props": {
               "id": "{{post.data.id}}",

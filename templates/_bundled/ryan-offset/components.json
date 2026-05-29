@@ -1717,6 +1717,19 @@
         "props": {}
       },
       {
+        "name": "PageHeader",
+        "type": "composite",
+        "description": "페이지 대표 타이틀 (페이지 명칭만, 흰 배경)",
+        "path": "src/components/composite/PageHeader.tsx",
+        "props": {
+          "title": {
+            "type": "string",
+            "required": false,
+            "description": "페이지 제목 (페이지 명칭)"
+          }
+        }
+      },
+      {
         "name": "RevealScrollManager",
         "type": "composite",
         "description": "글로벌 reveal observer — .aict-home .reveal 요소에 viewport 진입 시 is-in-view 토글",
