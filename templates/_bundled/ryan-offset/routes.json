@@ -133,6 +133,14 @@
     },
 
     {
+      "_comment": "=== 문의 ===",
+      "path": "/contact",
+      "layout": "contact/index",
+      "auth_required": false,
+      "meta": { "title": "문의" }
+    },
+
+    {
       "_comment": "=== 제작의뢰 ===",
       "path": "/inquiry",
       "layout": "inquiry/index",

@@ -1,0 +1,13 @@
+{
+    "name": "plugins/offset-support",
+    "description": "Customer support (Q&A) plugin for Gnuboard7 platform by offset",
+    "type": "library",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plugins\\Offset\\Support\\": ["src/", "./"]
+        }
+    }
+}

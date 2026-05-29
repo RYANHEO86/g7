@@ -1737,6 +1737,19 @@
         "props": {}
       },
       {
+        "name": "ContactSection",
+        "type": "composite",
+        "description": "문의 페이지 — FAQ + 로그인 본인 문의(qna) 위젯 + 제작상담 안내",
+        "path": "src/components/composite/ContactSection.tsx",
+        "props": {
+          "loggedIn": { "type": "boolean", "required": false, "description": "로그인 여부" },
+          "questions": { "type": "array", "required": false, "description": "본인 문의 글 목록" },
+          "writeHref": { "type": "string", "required": false },
+          "loginHref": { "type": "string", "required": false },
+          "inquiryHref": { "type": "string", "required": false }
+        }
+      },
+      {
         "name": "RevealScrollManager",
         "type": "composite",
         "description": "글로벌 reveal observer — .aict-home .reveal 요소에 viewport 진입 시 is-in-view 토글",

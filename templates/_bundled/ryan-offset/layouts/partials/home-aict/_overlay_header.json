@@ -28,7 +28,7 @@
       },
       {
         "label": "문의",
-        "href": "#"
+        "href": "/contact"
       }
     ],
     "loginHref": "/login",

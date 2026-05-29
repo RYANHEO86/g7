@@ -1,0 +1,16 @@
+{
+    "identifier": "offset-support",
+    "vendor": "offset",
+    "name": { "ko": "고객지원", "en": "Support" },
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": {
+        "ko": "문의(Q&A) — 로그인 본인 문의 조회 + qna 게시판 셋업. 추후 FAQ·AI 챗봇 확장.",
+        "en": "Support (Q&A) — logged-in user's own inquiries + qna board setup."
+    },
+    "g7_version": ">=7.0.0-beta.5",
+    "dependencies": {
+        "modules": { "sirsoft-board": ">=1.0.0" },
+        "plugins": {}
+    }
+}

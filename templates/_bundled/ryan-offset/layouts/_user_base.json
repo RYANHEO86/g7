@@ -1953,7 +1953,7 @@
                                     { "label": "테마", "href": "/board/theme" },
                                     { "label": "제작의뢰", "href": "/inquiry" },
                                     { "label": "가격", "href": "/pricing" },
-                                    { "label": "문의", "href": "#" }
+                                    { "label": "문의", "href": "/contact" }
                                 ],
                                 "loginHref": "/login",
                                 "loginLabel": "로그인",

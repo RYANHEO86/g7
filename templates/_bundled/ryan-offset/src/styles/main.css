@@ -255,3 +255,8 @@
  */
 @import './builder-badge.css';
 
+/**
+ * 문의 페이지 (contact)
+ */
+@import './contact.css';
+
