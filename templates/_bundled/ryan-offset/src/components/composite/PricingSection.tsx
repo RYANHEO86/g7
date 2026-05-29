@@ -46,19 +46,20 @@ const PLANS: Plan[] = [
   {
     key: 'setup',
     badge: '가장 인기',
-    eyebrow: 'STANDARD',
-    name: '테마 + 셋팅',
+    eyebrow: 'BASIC',
+    name: '베이직',
     sub: '설치부터 오픈까지 맡기는 분',
     price: '테마가 + ₩300,000',
     priceNote: '예: ₩389,000 부터',
     features: [
       { text: '테마 구매 전체 포함' },
       { text: '설치 + 도메인 연결', highlight: true },
+      { text: '메인페이지 세팅', highlight: true },
       { text: '커스텀 페이지 3종 제작', highlight: true },
       { text: '콘텐츠 반영 · 반응형 점검' },
       { text: 'SEO 기본 세팅' },
     ],
-    ctaLabel: '셋팅 의뢰하기',
+    ctaLabel: '베이직 의뢰하기',
     ctaHref: '/inquiry',
     featured: true,
   },
@@ -70,11 +71,11 @@ const PLANS: Plan[] = [
     price: '테마가 + ₩790,000',
     priceNote: '부터 · 범위에 따라 협의',
     features: [
-      { text: '테마 + 셋팅 전체 포함' },
-      { text: 'AI 맞춤 이미지 제작', highlight: true },
+      { text: '베이직 전체 포함' },
+      { text: '맞춤 이미지 제작 (AI 활용)', highlight: true },
       { text: '맞춤 문구 · 카피라이팅', highlight: true },
-      { text: '커스텀 페이지 5종', highlight: true },
-      { text: '로고 리터치 · GA/서치콘솔 연결' },
+      { text: '커스텀 페이지 8종 제작', highlight: true },
+      { text: '로고 리터치' },
     ],
     ctaLabel: '플러스 상담',
     ctaHref: '/inquiry',
@@ -83,15 +84,16 @@ const PLANS: Plan[] = [
     key: 'premium',
     eyebrow: 'PREMIUM',
     name: '프리미엄',
-    sub: '기능까지 필요한 분',
+    sub: '웹사이트를 넘어, 플랫폼으로',
     price: '별도 견적',
     priceNote: '요구사항 기반 맞춤 산정',
     features: [
       { text: '플러스 전체 포함' },
-      { text: '기능 개발 (회원·결제·예약 등)', highlight: true },
-      { text: '디자인 풀 커스텀', highlight: true },
-      { text: '페이지 무제한 협의' },
-      { text: '지속 유지보수' },
+      { text: '회원·결제·예약 등 기능 개발', highlight: true },
+      { text: '관리자 대시보드 · 데이터 연동', highlight: true },
+      { text: '외부 API · 서비스 연동', highlight: true },
+      { text: '디자인 풀 커스텀 · 페이지 무제한' },
+      { text: '전담 PM · 지속 유지보수' },
     ],
     ctaLabel: '프리미엄 문의',
     ctaHref: '/inquiry',
@@ -123,17 +125,19 @@ const COMPARE_ROWS: CompareRow[] = [
   { label: '테마 파일 제공', values: [true, true, true, true] },
   { label: '평생 무료 업데이트', values: [true, true, true, true] },
   { label: '설치 · 도메인 연결', values: [false, true, true, true] },
-  { label: '커스텀 페이지', values: ['—', '3종', '5종', '무제한 협의'] },
+  { label: '메인페이지 세팅', values: [false, true, true, true] },
+  { label: '커스텀 페이지', values: ['—', '3종', '8종', '무제한 협의'] },
   { label: 'SEO 기본 세팅', values: [false, true, true, true] },
-  { label: 'AI 맞춤 이미지', values: [false, false, true, true] },
+  { label: '맞춤 이미지 (AI 활용)', values: [false, false, true, true] },
   { label: '맞춤 카피라이팅', values: [false, false, true, true] },
   { label: '로고 작업', values: [false, false, '리터치', '신규 제작'] },
-  { label: '기능 개발', values: [false, false, false, true] },
+  { label: '기능 개발 (회원·결제 등)', values: [false, false, false, true] },
+  { label: '관리자 대시보드 · 연동', values: [false, false, false, true] },
   { label: '디자인 풀 커스텀', values: [false, false, false, true] },
-  { label: '유지보수', values: [false, '옵션', '옵션', true] },
+  { label: '유지보수', values: [false, '옵션', '옵션', '전담'] },
 ];
 
-const PLAN_LABELS = ['테마 구매', '테마+셋팅', '플러스', '프리미엄'];
+const PLAN_LABELS = ['테마 구매', '베이직', '플러스', '프리미엄'];
 
 interface FaqItem {
   q: string;
@@ -150,11 +154,11 @@ const FAQS: FaqItem[] = [
     a: '테마+셋팅 기준 평균 7~14일 정도 소요됩니다. 플러스·프리미엄은 범위에 따라 상담 시 일정을 안내드립니다.',
   },
   {
-    q: '커스텀 페이지 3종 / 5종은 어떤 의미인가요?',
+    q: '커스텀 페이지 3종 / 8종은 어떤 의미인가요?',
     a: '소개·서비스·문의처럼 메인 외에 추가로 디자인·제작해 드리는 페이지 수입니다. 더 필요하면 옵션으로 1종씩 추가할 수 있습니다.',
   },
   {
-    q: 'AI 이미지는 어떤 식으로 만들어지나요?',
+    q: '맞춤 이미지는 어떤 식으로 만들어지나요?',
     a: '브랜드 톤과 업종에 맞춰 히어로·배경·제품컷 등을 AI로 제작한 뒤, 사람이 검수·보정해 자연스럽게 반영합니다.',
   },
   {
@@ -186,7 +190,6 @@ const PricingSection: React.FC = () => {
       <Div className="aict-layout">
         {/* 인트로 */}
         <Div className="pricing-intro reveal">
-          <Span className="pricing-intro__badge">평균 14일 납품 · 4.9★ · 평생 업데이트</Span>
           <P className="pricing-intro__lead">
             필요한 만큼만 고르세요. 직접 설치부터 풀빌드까지, 단계별로 준비했습니다.
           </P>
@@ -225,11 +228,6 @@ const PricingSection: React.FC = () => {
               기능까지 필요해요
             </Button>
           </Div>
-          {recommend ? (
-            <P className="pricing-diagnose__result">
-              추천 플랜: <strong>{PLANS.find((p) => p.key === recommend)?.name}</strong> — 아래에서 강조 표시됩니다.
-            </P>
-          ) : null}
         </Div>
 
         {/* 4 플랜 카드 */}

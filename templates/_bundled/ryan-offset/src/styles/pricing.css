@@ -117,9 +117,18 @@
   border-color: var(--brand);
   box-shadow: var(--sh-brand);
 }
+/* 진단 위젯이 추천한 플랜 — 로고 엠블럼(핑크→퍼플→블루) 그라데이션 테두리 + 다색 글로우.
+   내부는 흰 배경(padding-box) 유지, 글로우는 box-shadow 로 카드 바깥에만 번짐 */
 .pricing .pricing-card--picked {
-  border-color: var(--ink);
-  box-shadow: 0 0 0 3px rgba(0, 162, 105, 0.18), var(--sh-2);
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    conic-gradient(from 140deg, #FF4DA6, #B14AE0, #4B8DF8, #FF4DA6) border-box;
+  transform: translateY(-6px);
+  box-shadow:
+    -10px 4px 28px rgba(255, 77, 166, 0.35),
+    10px 4px 28px rgba(75, 141, 248, 0.35),
+    0 16px 40px rgba(177, 74, 224, 0.30);
 }
 .pricing .pricing-card__badge {
   position: absolute;
