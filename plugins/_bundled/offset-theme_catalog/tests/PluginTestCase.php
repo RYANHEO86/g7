@@ -3,6 +3,8 @@
 namespace Plugins\Offset\ThemeCatalog\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Route;
+use Plugins\Offset\ThemeCatalog\Http\Controllers\ThemeMetaController;
 use Plugins\Offset\ThemeCatalog\Repositories\Contracts\ThemePostMetaRepositoryInterface;
 use Plugins\Offset\ThemeCatalog\Repositories\ThemePostMetaRepository;
 use Tests\TestCase;
@@ -24,6 +26,14 @@ abstract class PluginTestCase extends TestCase
         parent::setUp();
 
         $this->app->bind(ThemePostMetaRepositoryInterface::class, ThemePostMetaRepository::class);
+
+        // 테스트 환경에선 플러그인 라우트가 로드되지 않으므로 직접 등록.
+        Route::prefix('api/plugins/offset-theme_catalog')
+            ->middleware('api')
+            ->group(function () {
+                Route::get('/posts/{postId}/meta', [ThemeMetaController::class, 'show']);
+                Route::get('/theme/metas', [ThemeMetaController::class, 'index']);
+            });
 
         $this->snapshotHookManager();
     }

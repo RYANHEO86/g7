@@ -3,18 +3,18 @@
 namespace Plugins\Offset\ThemeCatalog;
 
 use App\Extension\AbstractPlugin;
+use Plugins\Offset\ThemeCatalog\Listeners\ThemeMetaListener;
 
 class Plugin extends AbstractPlugin
 {
     /**
      * 훅 리스너 목록 반환.
-     * (ThemeMetaListener 는 Task 4 에서 추가)
      *
      * @return array
      */
     public function getHookListeners(): array
     {
-        return [];
+        return [ThemeMetaListener::class];
     }
 
     /**
