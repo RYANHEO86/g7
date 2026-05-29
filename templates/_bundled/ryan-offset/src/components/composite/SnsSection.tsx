@@ -1,5 +1,5 @@
 import React from 'react';
-import { Div, Section, H2 } from '../basic';
+import { Div, Section, Span, H2 } from '../basic';
 
 /**
  * S7 — CTA 타이틀 섹션 (다크 배경).
