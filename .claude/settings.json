@@ -1,0 +1,27 @@
+{
+  "worktree": {
+    "bgIsolation": "none"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/user-prompt-docs-reminder.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}
