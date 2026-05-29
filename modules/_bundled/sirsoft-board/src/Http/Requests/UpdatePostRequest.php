@@ -65,8 +65,6 @@ class UpdatePostRequest extends FormRequest
             'attachment_ids.*' => ['integer', 'min:1'],
             // temp_key는 게시판 존재 여부와 무관하게 항상 허용
             'temp_key' => ['nullable', 'string', 'max:64'],
-            // 게시판 도메인별 자유 추가필드 — 테마 카탈로그의 가격/라이센스/changelog 등
-            'extra_data' => ['nullable', 'array'],
         ];
 
         // 훅: 모듈/플러그인이 validation rules를 동적으로 추가할 수 있도록 필터 제공

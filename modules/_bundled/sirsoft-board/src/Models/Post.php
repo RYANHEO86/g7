@@ -79,7 +79,6 @@ class Post extends Model implements FulltextSearchable
         'replies_count',
         'comments_count',
         'attachments_count',
-        'extra_data',
     ];
 
     /**
@@ -100,7 +99,6 @@ class Post extends Model implements FulltextSearchable
             'replies_count' => 'integer',
             'comments_count' => 'integer',
             'attachments_count' => 'integer',
-            'extra_data' => 'array',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',

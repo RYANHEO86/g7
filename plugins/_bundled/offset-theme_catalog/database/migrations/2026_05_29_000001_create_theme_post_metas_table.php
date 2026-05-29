@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('description_short', 255)->nullable();
             $table->text('description_long')->nullable();
             $table->json('features')->nullable();
-            $table->text('changelog')->nullable();
+            $table->json('changelog')->nullable();
             $table->string('demo_url', 500)->nullable();
             $table->string('purchase_url', 500)->nullable();
             $table->unsignedInteger('download_count')->default(0);

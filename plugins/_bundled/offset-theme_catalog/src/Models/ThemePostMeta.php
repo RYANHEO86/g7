@@ -16,6 +16,7 @@ class ThemePostMeta extends Model
 
     protected $casts = [
         'features' => 'array',
+        'changelog' => 'array',
         'download_count' => 'integer',
         'review_count' => 'integer',
     ];

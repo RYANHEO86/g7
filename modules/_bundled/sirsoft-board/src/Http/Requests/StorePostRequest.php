@@ -76,8 +76,6 @@ class StorePostRequest extends FormRequest
             'password' => ['nullable', 'string', 'min:4'],
             // temp_key는 게시판 존재 여부와 무관하게 항상 허용
             'temp_key' => ['nullable', 'string', 'max:64'],
-            // 게시판 도메인별 자유 추가필드 — 테마 카탈로그의 가격/라이센스/changelog 등
-            'extra_data' => ['nullable', 'array'],
         ];
 
         // 게시판이 있는 경우에만 parent_id와 attachment_ids 검증

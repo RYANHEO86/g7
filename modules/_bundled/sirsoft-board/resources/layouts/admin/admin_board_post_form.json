@@ -364,9 +364,6 @@
                                     },
                                     {
                                         "partial": "partials/admin_board_post_form/_attachments.json"
-                                    },
-                                    {
-                                        "partial": "partials/admin_board_post_form/_extra_fields_theme.json"
                                     }
                                 ]
                             }
