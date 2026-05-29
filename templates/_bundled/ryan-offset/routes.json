@@ -132,6 +132,14 @@
     },
 
     {
+      "_comment": "=== 소개 ===",
+      "path": "/about",
+      "layout": "about/index",
+      "auth_required": false,
+      "meta": { "title": "소개" }
+    },
+
+    {
       "_comment": "=== 가격 ===",
       "path": "/pricing",
       "layout": "pricing/index",

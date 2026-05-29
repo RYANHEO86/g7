@@ -1750,6 +1750,13 @@
         }
       },
       {
+        "name": "AboutSection",
+        "type": "composite",
+        "description": "소개 페이지 — 브랜드 철학 + 밸류 + 제공내역 + 기준 + CTA (정적)",
+        "path": "src/components/composite/AboutSection.tsx",
+        "props": {}
+      },
+      {
         "name": "RevealScrollManager",
         "type": "composite",
         "description": "글로벌 reveal observer — .aict-home .reveal 요소에 viewport 진입 시 is-in-view 토글",

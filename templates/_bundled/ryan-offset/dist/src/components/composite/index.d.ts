@@ -68,6 +68,7 @@ export { default as ThemeDetailContent } from './ThemeDetailContent';
 export type { ThemeDetailContentProps } from './ThemeDetailContent';
 export { default as PricingSection } from './PricingSection';
 export { default as ContactSection } from './ContactSection';
+export { default as AboutSection } from './AboutSection';
 export { default as InquiryStatusBar } from './InquiryStatusBar';
 export type { InquiryStatusBarProps } from './InquiryStatusBar';
 export { default as InquiryCard } from './InquiryCard';
@@ -136,6 +137,7 @@ export declare const compositeComponents: {
     AictFooter: () => Promise<typeof import("./AictFooter")>;
     PricingSection: () => Promise<typeof import("./PricingSection")>;
     ContactSection: () => Promise<typeof import("./ContactSection")>;
+    AboutSection: () => Promise<typeof import("./AboutSection")>;
     ThemeListSection: () => Promise<typeof import("./ThemeListSection")>;
     ThemeGalleryViewer: () => Promise<typeof import("./ThemeGalleryViewer")>;
     BuyCardSticky: () => Promise<typeof import("./BuyCardSticky")>;

@@ -84,6 +84,7 @@ export { default as ThemeDetailContent } from './ThemeDetailContent';
 export type { ThemeDetailContentProps } from './ThemeDetailContent';
 export { default as PricingSection } from './PricingSection';
 export { default as ContactSection } from './ContactSection';
+export { default as AboutSection } from './AboutSection';
 
 // 제작의뢰 (sirsoft-inquiry) 전용
 export { default as InquiryStatusBar } from './InquiryStatusBar';
@@ -167,6 +168,7 @@ export const compositeComponents = {
   AictFooter: () => import('./AictFooter'),
   PricingSection: () => import('./PricingSection'),
   ContactSection: () => import('./ContactSection'),
+  AboutSection: () => import('./AboutSection'),
 
   // 테마 게시판 (slug=theme) 전용
   ThemeListSection: () => import('./ThemeListSection'),

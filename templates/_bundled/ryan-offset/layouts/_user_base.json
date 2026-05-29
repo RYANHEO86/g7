@@ -1949,7 +1949,7 @@
                                 "logoLabel": "Offset Theme",
                                 "logoHref": "/",
                                 "menu": [
-                                    { "label": "소개", "href": "#" },
+                                    { "label": "소개", "href": "/about" },
                                     { "label": "테마", "href": "/board/theme" },
                                     { "label": "제작의뢰", "href": "/inquiry" },
                                     { "label": "가격", "href": "/pricing" },

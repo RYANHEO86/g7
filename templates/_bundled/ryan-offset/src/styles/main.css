@@ -260,3 +260,8 @@
  */
 @import './contact.css';
 
+/**
+ * 소개 페이지 (about)
+ */
+@import './about.css';
+

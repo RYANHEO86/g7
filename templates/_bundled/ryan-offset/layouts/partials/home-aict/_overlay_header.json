@@ -12,7 +12,7 @@
     "menu": [
       {
         "label": "소개",
-        "href": "#"
+        "href": "/about"
       },
       {
         "label": "테마",
