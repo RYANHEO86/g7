@@ -52,9 +52,6 @@
             "partial": "partials/home-aict/_hero.json"
           },
           {
-            "partial": "partials/home-aict/_section_quick.json"
-          },
-          {
             "partial": "partials/home-aict/_section_themes.json"
           },
           {

@@ -63,9 +63,11 @@ const PopupSlider: React.FC<PopupSliderProps> = ({
 
   return (
     <Div className={composed} id="popup-zone">
-      <Div className="popup-zone__head">
-        <H3 className="popup-zone__title">{title}</H3>
-      </Div>
+      {title ? (
+        <Div className="popup-zone__head">
+          <H3 className="popup-zone__title">{title}</H3>
+        </Div>
+      ) : null}
 
       <Div className="popup-zone__stage">
         {posters.map((p, i) => (

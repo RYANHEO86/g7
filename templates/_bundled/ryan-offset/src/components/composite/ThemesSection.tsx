@@ -59,8 +59,7 @@ const ThemesSection: React.FC = () => {
       <Div className="aict-layout">
         <Div className="themes-head" role="banner">
           <Div className="themes-head__left">
-            <Span className="eyebrow">THEMES</Span>
-            <H2 className="section-tit">완성된 테마 라인업</H2>
+            <H2 className="section-tit">오프셋테마 라인업</H2>
           </Div>
           <Div className="themes-head__right">
             <A href="#" className="themes-head__cta">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Div, Section, Ul, Li, A, Span, H3, Img } from '../basic';
+import { Div, Section } from '../basic';
 import NoticeTab, { NoticeListItem, NoticeTabDef } from './NoticeTab';
 import PopupSlider, { PopupSlideItem } from './PopupSlider';
 
@@ -50,38 +50,6 @@ const NOTICE_LISTS: Record<string, NoticeListItem[]> = {
   ],
 };
 
-interface TrendItem {
-  image: string;
-  alt: string;
-  title: string;
-  date: string;
-  href: string;
-}
-
-const TRENDS: TrendItem[] = [
-  {
-    image: `${ASSET_BASE}/news/news1.jpg`,
-    alt: '2026년 청렴 리더 워크숍',
-    title: '2026년 청렴 리더 워크숍',
-    date: '2026-05-07',
-    href: '#',
-  },
-  {
-    image: `${ASSET_BASE}/news/news2.jpg`,
-    alt: '어린이날 기념 주경기장 부스 운영',
-    title: '어린이날 기념 주경기장 부스 운영',
-    date: '2026-05-07',
-    href: '#',
-  },
-  {
-    image: `${ASSET_BASE}/news/news3.jpg`,
-    alt: '지역사회 상생 협력 사회공헌 활동',
-    title: '지역사회 상생 협력 사회공헌 활동',
-    date: '2026-04-15',
-    href: '#',
-  },
-];
-
 const POSTERS: PopupSlideItem[] = [
   { image: `${ASSET_BASE}/popup/poster1.jpg`, alt: '포스터 1' },
   { image: `${ASSET_BASE}/popup/poster2.png`, alt: '포스터 2' },
@@ -100,69 +68,19 @@ const NoticeArea: React.FC = () => {
           {/* LEFT COLUMN */}
           <Div className="section2-left">
             <NoticeTab
-              title="알림마당"
+              title="알림장"
               moreHref="#"
-              moreLabel="알림마당 더보기"
+              moreLabel="알림장 더보기"
               tabs={TABS}
               lists={NOTICE_LISTS}
               defaultTab="notice"
               className="reveal"
             />
-
-            <Div className="trend-card reveal reveal--delay-1">
-              <Div className="trend-card__head">
-                <H3 className="trend-card__title">융기원 동향</H3>
-                <A href="#" className="more-btn" aria-label="융기원 동향 더보기">
-                  <Span className="more-btn__plus" aria-hidden="true">
-                    +
-                  </Span>
-                </A>
-              </Div>
-              <Ul className="trend-list">
-                {TRENDS.map((t, i) => (
-                  <Li key={i} className="trend-item">
-                    <A href={t.href} className="trend-item__link">
-                      <Span className="trend-item__thumb">
-                        <Img src={t.image} alt={t.alt} loading="lazy" />
-                      </Span>
-                      <Span className="trend-item__title">{t.title}</Span>
-                      <Span className="trend-item__date">{t.date}</Span>
-                    </A>
-                  </Li>
-                ))}
-              </Ul>
-            </Div>
           </Div>
 
           {/* RIGHT COLUMN */}
           <Div className="section2-right">
-            <A href="#" className="publication-card reveal">
-              <Span className="publication-card__pattern" aria-hidden="true" />
-              <Span className="publication-card__inner">
-                <Span className="publication-card__label">발간물</Span>
-                <Span className="publication-card__title">2025 영문 브로슈어</Span>
-                <Span className="publication-card__meta">관리자 | 2025-11-25</Span>
-              </Span>
-              <Span className="publication-card__arrow" aria-hidden="true">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 12h14M13 6l6 6-6 6"
-                    stroke="#1A1A1A"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Span>
-            </A>
-
-            <PopupSlider posters={POSTERS} className="reveal reveal--delay-1" />
+            <PopupSlider posters={POSTERS} title="" className="reveal reveal--delay-1" />
           </Div>
         </Div>
       </Div>
