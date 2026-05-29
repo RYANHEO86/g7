@@ -207,6 +207,9 @@
 | `$value` (이벤트 값) | `$event.target.value` |
 | `{{props.xxx}}` (Partial) | data_sources ID 직접 참조 |
 | `{{$response.xxx}}` (onSuccess) | `{{response.xxx}}` ($ 접두사 없음) |
+| `route.slug` (`:slug` 없는 고정경로의 폼/공용 partial) | `route.slug ? route.slug : form_meta?.data?.board?.slug` |
+
+> **route param 함정**: `route.xxx`는 path params에서만 채워진다(예: `/board/:slug`의 `route.slug`). `/board/qna/write` 같은 **고정 경로**엔 `:slug`가 없어 `route.slug`가 **빈 값** → 공용 폼이 `/boards//posts`로 POST해 "권한 없음"처럼 보이는 엉뚱한 에러가 난다. 전용 라우트에서 공용 폼/컴포넌트(`_post_form.json` 등)를 쓸 땐 route param 의존을 확인하고 `form_meta.data.board.slug` 등으로 보충하라. (참고: `docs/frontend/data-binding.md` "route.xxx는 path params만")
 
 ### iteration/반복 렌더링
 
