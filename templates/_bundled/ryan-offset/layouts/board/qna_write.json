@@ -1,0 +1,111 @@
+{
+    "version": "1.0.0",
+    "layout_name": "board/qna_write",
+    "permissions": [],
+    "extends": "_user_base",
+    "meta": {
+        "title": "{{route.id ? '문의 수정' : '문의 작성'}}",
+        "description": "1:1 문의 작성"
+    },
+    "data_sources": [
+        {
+            "id": "form_data",
+            "type": "api",
+            "endpoint": "/api/modules/sirsoft-board/boards/{{route.slug}}/posts/form-data",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "optional",
+            "cache": false,
+            "refetchOnMount": true,
+            "initLocal": "form",
+            "loading_strategy": "blocking",
+            "params": {
+                "post_id": "{{route?.id ?? ''}}",
+                "parent_id": "{{query?.parent_id ?? ''}}",
+                "verification_token": "{{_local.verificationToken ?? ''}}"
+            },
+            "onSuccess": {
+                "handler": "setState",
+                "params": {
+                    "target": "local",
+                    "form": "{{response.data.data}}"
+                }
+            },
+            "errorHandling": {
+                "403": { "handler": "showErrorPage", "params": { "target": "content" } },
+                "404": { "handler": "showErrorPage", "params": { "target": "content" } }
+            }
+        },
+        {
+            "id": "form_meta",
+            "type": "api",
+            "endpoint": "/api/modules/sirsoft-board/boards/{{route.slug}}/posts/form-meta",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "optional",
+            "cache": false,
+            "refetchOnMount": true,
+            "params": {
+                "post_id": "{{route?.id ?? ''}}",
+                "parent_id": "{{query?.parent_id ?? ''}}",
+                "verification_token": "{{_local.verificationToken ?? ''}}"
+            },
+            "errorHandling": {
+                "403": { "handler": "showErrorPage", "params": { "target": "content" } },
+                "404": { "handler": "showErrorPage", "params": { "target": "content" } }
+            }
+        }
+    ],
+    "init_actions": [
+        {
+            "handler": "setState",
+            "params": {
+                "target": "global",
+                "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+                "hideDefaultHeader": true,
+                "hideDefaultFooter": true
+            }
+        },
+        {
+            "comment": "tempKey 생성",
+            "handler": "setState",
+            "params": {
+                "target": "local",
+                "tempKey": "{{('temp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9))}}"
+            }
+        }
+    ],
+    "slots": {
+        "content": [
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": { "className": "aict-home" },
+                "children": [
+                    { "partial": "partials/theme-aict/_subpage_header.json" },
+                    {
+                        "type": "composite",
+                        "name": "PageHeader",
+                        "props": { "title": "문의 작성" }
+                    },
+                    {
+                        "comment": "비회원 수정 시 비밀번호 확인 모달",
+                        "partial": "partials/board/form/_password_verify_modal.json"
+                    },
+                    {
+                        "type": "layout",
+                        "name": "Container",
+                        "blur_until_loaded": true,
+                        "dataKey": "form",
+                        "trackChanges": true,
+                        "props": { "className": "qna-write py-10 max-w-3xl mx-auto" },
+                        "children": [
+                            { "partial": "partials/board/form/_type_renderer.json" }
+                        ]
+                    },
+                    { "partial": "partials/home-aict/_aict_footer.json" }
+                ]
+            }
+        ]
+    }
+}

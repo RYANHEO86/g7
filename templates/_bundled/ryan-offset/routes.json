@@ -92,6 +92,13 @@
       }
     },
     {
+      "_comment": "=== 문의(qna) 작성 — 사이트 톤 전용, 로그인 필수 ===",
+      "path": "/board/qna/write",
+      "layout": "board/qna_write",
+      "auth_required": true,
+      "meta": { "title": "문의 작성" }
+    },
+    {
       "path": "/board/:slug",
       "layout": "board/index",
       "auth_required": false,
