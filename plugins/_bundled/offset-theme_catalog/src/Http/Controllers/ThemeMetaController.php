@@ -30,8 +30,13 @@ class ThemeMetaController extends PublicBaseController
     /** 다건 메타 (목록 카드용). post_ids=1,2,3 */
     public function index(Request $request)
     {
-        $ids = array_values(array_filter(array_map('intval', explode(',', (string) $request->query('post_ids')))));
-        $metas = $this->service->getByPostIds($ids);
+        $idsParam = (string) $request->query('post_ids');
+        if ($idsParam !== '') {
+            $ids = array_values(array_filter(array_map('intval', explode(',', $idsParam))));
+            $metas = $this->service->getByPostIds($ids);
+        } else {
+            $metas = $this->service->getAllMetas();
+        }
 
         return ResponseHelper::success('messages.success', ThemePostMetaResource::collection($metas));
     }

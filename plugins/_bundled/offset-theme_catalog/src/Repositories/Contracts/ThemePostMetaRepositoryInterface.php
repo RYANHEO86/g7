@@ -11,6 +11,8 @@ interface ThemePostMetaRepositoryInterface
 
     public function findByPostIds(array $postIds): Collection;
 
+    public function all(): Collection;
+
     public function upsert(int $postId, array $data): ThemePostMeta;
 
     public function deleteByPostId(int $postId): void;

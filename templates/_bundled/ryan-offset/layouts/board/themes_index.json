@@ -59,6 +59,18 @@
           "pagination": {}
         }
       }
+    },
+    {
+      "id": "themeMetas",
+      "type": "api",
+      "endpoint": "/api/plugins/offset-theme_catalog/theme/metas",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": {
+        "data": []
+      }
     }
   ],
   "slots": {
@@ -83,7 +95,7 @@
             "name": "ThemeListSection",
             "props": {
               "categories": "{{[{key:'all', label:'전체'}].concat(((posts.data.board.categories ?? []).map(c => ({key: c, label: c}))))}}",
-              "posts": "{{(posts.data.data ?? []).map(p => ({id: p.id, title: p.title, summary: (p.extra_data?.description_short ?? ''), thumbnail: (p.thumbnail ?? ''), category: (p.category ?? ''), price: (p.extra_data?.price ?? 0), href: '/board/theme/' + p.id}))}}",
+              "posts": "{{(posts.data.data ?? []).map(p => ({id: p.id, title: p.title, summary: ((themeMetas.data ?? []).find(x => x.post_id === p.id)?.description_short ?? ''), thumbnail: (p.thumbnail ?? ''), category: (p.category ?? ''), price: ((themeMetas.data ?? []).find(x => x.post_id === p.id)?.price ?? 0), href: '/board/theme/' + p.id}))}}",
               "perPage": 12,
               "baseHref": "/board/theme"
             }

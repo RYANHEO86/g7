@@ -7,7 +7,8 @@
     "seo": {
       "enabled": true,
       "data_sources": [
-        "post"
+        "post",
+        "themeMeta"
       ],
       "page_type": "board",
       "vars": {
@@ -19,7 +20,7 @@
       "og": {
         "type": "article",
         "title": "{{post.data.title ?? ''}}",
-        "description": "{{post.data.extra_data?.description_short ?? ''}}",
+        "description": "{{themeMeta.data?.description_short ?? ''}}",
         "image": "{{post.data.thumbnail ?? ''}}"
       }
     }
@@ -59,6 +60,18 @@
       "fallback": {
         "data": {}
       }
+    },
+    {
+      "id": "themeMeta",
+      "type": "api",
+      "endpoint": "/api/plugins/offset-theme_catalog/posts/{{route.id}}/meta",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": {
+        "data": null
+      }
     }
   ],
   "slots": {
@@ -85,18 +98,18 @@
               "id": "{{post.data.id}}",
               "category": "{{post.data.category ?? ''}}",
               "title": "{{post.data.title ?? ''}}",
-              "summary": "{{post.data.extra_data?.description_short ?? ''}}",
-              "description": "{{post.data.extra_data?.description_long ?? post.data.content ?? ''}}",
+              "summary": "{{themeMeta.data?.description_short ?? ''}}",
+              "description": "{{themeMeta.data?.description_long ?? post.data.content ?? ''}}",
               "gallery": "{{(post.data.attachments ?? []).filter(a => a.is_image).map(a => a.preview_url)}}",
-              "features": "{{post.data.extra_data?.features ?? []}}",
-              "changelog": "{{post.data.extra_data?.changelog ?? []}}",
-              "installNote": "{{post.data.extra_data?.install_note ?? ''}}",
-              "price": "{{post.data.extra_data?.price ?? 0}}",
-              "rating": "{{post.data.extra_data?.rating ?? 0}}",
-              "reviewCount": "{{post.data.extra_data?.review_count ?? 0}}",
-              "purchaseHref": "{{post.data.extra_data?.purchase_url ?? '#'}}",
-              "demoHref": "{{post.data.extra_data?.demo_url ?? '#'}}",
-              "specs": "{{[{label:'최소 요구', value: (post.data.extra_data?.min_requirement ?? '-')}, {label:'라이선스', value: (post.data.extra_data?.license ?? '-')}, {label:'업데이트', value: (post.data.extra_data?.last_update ?? '-')}, {label:'다운로드', value: (post.data.extra_data?.download_count != null ? post.data.extra_data.download_count.toLocaleString('ko-KR') + '회' : '-')}]}}",
+              "features": "{{themeMeta.data?.features ?? []}}",
+              "changelog": "{{themeMeta.data?.changelog ?? []}}",
+              "installNote": "{{themeMeta.data?.install_note ?? ''}}",
+              "price": "{{themeMeta.data?.price ?? 0}}",
+              "rating": "{{themeMeta.data?.rating ?? 0}}",
+              "reviewCount": "{{themeMeta.data?.review_count ?? 0}}",
+              "purchaseHref": "{{themeMeta.data?.purchase_url ?? '#'}}",
+              "demoHref": "{{themeMeta.data?.demo_url ?? '#'}}",
+              "specs": "{{[{label:'최소 요구', value: (themeMeta.data?.min_requirement ?? '-')}, {label:'라이선스', value: (themeMeta.data?.license ?? '-')}, {label:'업데이트', value: (themeMeta.data?.last_update ?? '-')}, {label:'다운로드', value: (themeMeta.data?.download_count != null ? themeMeta.data.download_count.toLocaleString('ko-KR') + '회' : '-')}]}}",
               "prevPost": "{{nav.data.prev ? {id: nav.data.prev.id, title: nav.data.prev.title} : null}}",
               "nextPost": "{{nav.data.next ? {id: nav.data.next.id, title: nav.data.next.title} : null}}",
               "listHref": "/board/theme",

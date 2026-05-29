@@ -52,4 +52,9 @@ class ThemePostMetaService
     {
         return $this->repository->findByPostIds($postIds)->values();
     }
+
+    public function getAllMetas(): Collection
+    {
+        return $this->repository->all();
+    }
 }

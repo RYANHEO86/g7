@@ -26,4 +26,14 @@ class ThemeMetaApiTest extends PluginTestCase
             ->assertOk()
             ->assertJsonCount(2, 'data');
     }
+
+    public function test_index_returns_all_when_no_post_ids(): void
+    {
+        app(ThemePostMetaRepositoryInterface::class)->upsert(701, ['price' => '1']);
+        app(ThemePostMetaRepositoryInterface::class)->upsert(702, ['price' => '2']);
+
+        $this->getJson('/api/plugins/offset-theme_catalog/theme/metas')
+            ->assertOk()
+            ->assertJsonCount(2, 'data');
+    }
 }

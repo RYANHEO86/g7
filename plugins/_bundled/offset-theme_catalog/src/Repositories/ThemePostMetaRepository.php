@@ -18,6 +18,11 @@ class ThemePostMetaRepository implements ThemePostMetaRepositoryInterface
         return ThemePostMeta::whereIn('post_id', $postIds)->get()->keyBy('post_id');
     }
 
+    public function all(): Collection
+    {
+        return ThemePostMeta::all();
+    }
+
     public function upsert(int $postId, array $data): ThemePostMeta
     {
         $meta = ThemePostMeta::firstOrNew(['post_id' => $postId]);
