@@ -30,7 +30,38 @@
       }
     }
   ],
-  "data_sources": [],
+  "data_sources": [
+    {
+      "id": "themePosts",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-board/boards/theme/posts",
+      "method": "GET",
+      "params": {
+        "page": 1,
+        "per_page": 4
+      },
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": {
+        "data": {
+          "data": []
+        }
+      }
+    },
+    {
+      "id": "themeMetas",
+      "type": "api",
+      "endpoint": "/api/plugins/offset-theme_catalog/theme/metas",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": {
+        "data": []
+      }
+    }
+  ],
   "slots": {
     "content": [
       {

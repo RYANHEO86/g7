@@ -1,9 +1,11 @@
 {
   "meta": {
     "is_partial": true,
-    "description": "S3 — 완성된 테마 라인업 4 카드."
+    "description": "S3 — 오프셋테마 라인업. 실제 theme 게시판 게시글(themePosts) + 플러그인 메타(themeMetas) 연동."
   },
   "type": "composite",
   "name": "ThemesSection",
-  "props": {}
+  "props": {
+    "posts": "{{(themePosts.data.data ?? []).map(p => ({ id: p.id, title: (p.title ?? ''), tag: (p.category ?? ''), thumbnail: (p.thumbnail ?? ''), summary: ((themeMetas.data ?? []).find(m => m.post_id === p.id)?.description_short ?? ''), price: ((themeMetas.data ?? []).find(m => m.post_id === p.id)?.price ?? ''), href: '/board/theme/' + p.id }))}}"
+  }
 }
