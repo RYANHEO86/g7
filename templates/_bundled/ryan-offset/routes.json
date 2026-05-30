@@ -99,6 +99,31 @@
       "meta": { "title": "문의 작성" }
     },
     {
+      "_comment": "=== 공지(notice) — 사이트 톤 전용 레이아웃 (theme 패턴) ===",
+      "path": "/board/notice",
+      "layout": "board/notice_index",
+      "auth_required": false,
+      "meta": { "title": "공지사항" }
+    },
+    {
+      "path": "/board/notice/write",
+      "layout": "board/notice_write",
+      "auth_required": true,
+      "meta": { "title": "공지 작성" }
+    },
+    {
+      "path": "/board/notice/:id/edit",
+      "layout": "board/notice_write",
+      "auth_required": true,
+      "meta": { "title": "공지 수정" }
+    },
+    {
+      "path": "/board/notice/:id",
+      "layout": "board/notice_show",
+      "auth_required": false,
+      "meta": { "title": "공지사항" }
+    },
+    {
       "path": "/board/:slug",
       "layout": "board/index",
       "auth_required": false,

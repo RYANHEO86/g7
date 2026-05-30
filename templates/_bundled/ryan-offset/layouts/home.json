@@ -60,6 +60,24 @@
       "fallback": {
         "data": []
       }
+    },
+    {
+      "id": "noticePosts",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-board/boards/notice/posts",
+      "method": "GET",
+      "params": {
+        "page": 1,
+        "per_page": 20
+      },
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "blocking",
+      "fallback": {
+        "data": {
+          "data": []
+        }
+      }
     }
   ],
   "slots": {

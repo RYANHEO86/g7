@@ -1,9 +1,18 @@
 {
   "meta": {
     "is_partial": true,
-    "description": "S4 — 알림마당+융기원 동향 (좌) + 발간물+POPUP ZONE (우) 2-col grid."
+    "description": "S4 — 알림장(좌, notice 게시판 연동) + 프로모션 배너(우) 2-col grid. items 는 themePosts 와 동형의 top-level 배열 map 표현식(검증된 패턴). 카테고리 탭 분류·날짜 가공은 NoticeArea 내부에서 처리."
   },
   "type": "composite",
   "name": "NoticeArea",
-  "props": {}
+  "props": {
+    "tabs": [
+      { "key": "공지사항", "label": "공지사항" },
+      { "key": "업데이트", "label": "업데이트" },
+      { "key": "이벤트", "label": "이벤트" }
+    ],
+    "defaultTab": "공지사항",
+    "moreHref": "/board/notice",
+    "rows": "{{(noticePosts.data.data ?? []).map(p => ({ title: (p.title ?? ''), date: (p.created_at ?? ''), href: '/board/notice/' + p.id, category: (p.category ?? '') }))}}"
+  }
 }

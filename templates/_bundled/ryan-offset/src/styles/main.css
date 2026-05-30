@@ -265,3 +265,8 @@
  */
 @import './about.css';
 
+/**
+ * 공지(notice) 게시판 리스트/뷰/쓰기 — .notice-board__* (.aict-home 스코프)
+ */
+@import './notice.css';
+

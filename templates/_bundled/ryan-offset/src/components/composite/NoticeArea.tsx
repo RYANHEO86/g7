@@ -5,75 +5,58 @@ import NoticeTab, { NoticeListItem, NoticeTabDef } from './NoticeTab';
 const ASSET_BASE =
   '/api/templates/assets/ryan-offset/assets/images/aict';
 
-const TABS: NoticeTabDef[] = [
-  { key: 'notice', label: '공지사항' },
-  { key: 'press', label: '보도자료' },
-  { key: 'hire', label: '채용결과' },
-];
+export interface NoticeAreaItem {
+  title: string;
+  /** created_at 원본 (예: "2026-05-30 토요일 19:00") — 표시 시 앞 10자만 사용 */
+  date: string;
+  href: string;
+  category: string;
+}
 
-const NOTICE_LISTS: Record<string, NoticeListItem[]> = {
-  notice: [
-    {
-      title:
-        '2026년 제1회 미래교육 공동포럼 "인공지능(AI) 시대의 미래교육: AI 시대, 새로운 학교를 말하다"',
-      date: '2026-05-15',
-      href: '#',
-    },
-    {
-      title: '2026 경기도미래모빌리티센터 신규 입주기업 모집 공고',
-      date: '2026-05-12',
-      href: '#',
-    },
-    {
-      title: '26년 제2회 학부모와 함께하는 반도체 교실 참여자 모집 공고',
-      date: '2026-05-08',
-      href: '#',
-    },
-    {
-      title: '2026 경기도 Pre-Poc 시장 실증 및 사업화 연계 전략',
-      date: '2026-04-23',
-      href: '#',
-    },
-    {
-      title: '2026년 상반기 디자인·개발 협력사 등록 안내',
-      date: '2026-04-15',
-      href: '#',
-    },
-  ],
-  press: [
-    { title: 'AICT, 미래 모빌리티 산학 협력 협약 체결', date: '2026-05-10', href: '#' },
-    { title: '반도체 인재양성 프로그램, 정부 우수사례 선정', date: '2026-05-02', href: '#' },
-    { title: '자율주행 시범도시 운영 성과 보고회 개최', date: '2026-04-20', href: '#' },
-    { title: '국제 AI 컨소시엄 정식 출범, AICT 의장기관 선임', date: '2026-04-08', href: '#' },
-    { title: '오프셋테마, 신규 비즈니스 테마 5종 동시 출시', date: '2026-03-28', href: '#' },
-  ],
-  hire: [
-    { title: '2026 정규직 연구원 채용 최종 합격자 안내', date: '2026-05-09', href: '#' },
-    { title: '상반기 행정직 채용 결과 공고', date: '2026-04-25', href: '#' },
-    { title: '인턴 연구원 모집 결과 발표', date: '2026-04-12', href: '#' },
-    { title: '전문계약직 1차 서류전형 합격자 안내', date: '2026-03-30', href: '#' },
-    { title: '2026 하반기 신입 디자이너 채용 서류 합격자 발표', date: '2026-03-18', href: '#' },
-  ],
-};
+export interface NoticeAreaProps {
+  /** 탭 정의 — { key, label }. key 가 곧 게시판 category. */
+  tabs?: NoticeTabDef[];
+  /** notice 게시판 글 목록(단일 배열). category 로 탭 분류한다. (home.json noticePosts → _section_notice 매핑) */
+  rows?: NoticeAreaItem[];
+  defaultTab?: string;
+  moreHref?: string;
+}
+
+const EMPTY_TABS: NoticeTabDef[] = [];
+const EMPTY_ITEMS: NoticeAreaItem[] = [];
 
 /**
- * S4 — 알림장(좌) + 프로모션 배너(우) 2-column.
+ * S4 — 알림장(좌, notice 게시판 연동) + 프로모션 배너(우) 2-column.
+ * 데이터는 props.rows(단일 배열)로 주입받아 탭 category 별로 분류한다.
  * 우측 배너는 4:3 단일 링크 배너 (PC·모바일 동일 비율).
  */
-const NoticeArea: React.FC = () => {
+const NoticeArea: React.FC<NoticeAreaProps> = ({
+  tabs = EMPTY_TABS,
+  rows = EMPTY_ITEMS,
+  defaultTab,
+  moreHref = '/board/notice',
+}) => {
+  // 카테고리(탭 key)별 분류 + 날짜는 앞 10자(YYYY-MM-DD)만
+  const lists: Record<string, NoticeListItem[]> = {};
+  tabs.forEach((t) => {
+    lists[t.key] = rows
+      .filter((it) => it.category === t.key)
+      .map((it) => ({ title: it.title, date: (it.date ?? '').slice(0, 10), href: it.href }));
+  });
+
   return (
     <Section className="section section2">
       <Div className="aict-layout">
         <Div className="section2-grid">
-          {/* LEFT COLUMN */}
+          {/* LEFT COLUMN — 알림장 (notice 게시판 연동) */}
           <Div className="section2-left">
             <NoticeTab
               title="알림장"
-              moreHref="#"
+              moreHref={moreHref}
               moreLabel="알림장 더보기"
-              tabs={TABS}
-              lists={NOTICE_LISTS}
-              defaultTab="notice"
+              tabs={tabs}
+              lists={lists}
+              defaultTab={defaultTab ?? tabs[0]?.key}
               className="reveal"
             />
           </Div>

@@ -1,0 +1,252 @@
+{
+  "version": "1.0.0",
+  "layout_name": "board/notice_show",
+  "permissions": [],
+  "extends": "_user_base",
+  "meta": {
+    "seo": {
+      "enabled": true,
+      "data_sources": ["post"],
+      "page_type": "post",
+      "vars": {
+        "site_name": "$core_settings:general.site_name",
+        "board_name": "{{post.data.board.name ?? '공지사항'}}",
+        "post_title": "{{post.data.title ?? ''}}"
+      },
+      "priority": 0.5,
+      "changefreq": "monthly",
+      "og": {
+        "type": "article",
+        "title": "{{post.data.title ?? ''}}",
+        "description": "{{post.data.content ?? ''}}"
+      }
+    }
+  },
+  "init_actions": [
+    {
+      "handler": "setState",
+      "params": {
+        "target": "global",
+        "aictAssetBase": "/api/templates/assets/ryan-offset/assets/images/aict",
+        "hideDefaultHeader": true,
+        "hideDefaultFooter": true
+      }
+    }
+  ],
+  "data_sources": [
+    {
+      "id": "post",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-board/boards/notice/posts/{{route.id}}",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "refetchOnMount": true,
+      "loading_strategy": "progressive",
+      "fallback": { "data": {} },
+      "errorHandling": {
+        "403": { "handler": "showErrorPage", "params": { "target": "content" } },
+        "404": { "handler": "showErrorPage", "params": { "target": "content" } }
+      }
+    },
+    {
+      "id": "nav",
+      "type": "api",
+      "endpoint": "/api/modules/sirsoft-board/boards/notice/posts/{{route.id}}/navigation",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_mode": "optional",
+      "loading_strategy": "progressive",
+      "fallback": { "data": {} }
+    }
+  ],
+  "slots": {
+    "content": [
+      {
+        "type": "basic",
+        "name": "Div",
+        "props": { "className": "aict-home" },
+        "children": [
+          { "partial": "partials/board/notice/_subpage_header.json" },
+          {
+            "type": "composite",
+            "name": "PageHeader",
+            "props": { "title": "공지사항" }
+          },
+          {
+            "type": "basic",
+            "name": "Section",
+            "props": { "className": "section notice-detail" },
+            "children": [
+              {
+                "type": "basic",
+                "name": "Div",
+                "props": { "className": "aict-layout" },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "Div",
+                    "props": { "className": "notice-detail__wrap" },
+                    "blur_until_loaded": { "enabled": true, "data_sources": "post" },
+                    "children": [
+                      {
+                        "comment": "헤더: 카테고리 + 제목 + 메타",
+                        "type": "basic",
+                        "name": "Div",
+                        "props": { "className": "notice-detail__head" },
+                        "children": [
+                          {
+                            "type": "basic",
+                            "name": "Div",
+                            "if": "{{post?.data?.category || post?.data?.is_new}}",
+                            "props": { "className": "notice-detail__badges" },
+                            "children": [
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{post?.data?.category}}",
+                                "props": { "className": "notice-detail__cat" },
+                                "text": "{{post?.data?.category ?? ''}}"
+                              },
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{post?.data?.is_new}}",
+                                "props": { "className": "notice-detail__new" },
+                                "text": "N"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "basic",
+                            "name": "H1",
+                            "props": { "className": "notice-detail__title" },
+                            "text": "{{post?.data?.title ?? ''}}"
+                          },
+                          {
+                            "type": "basic",
+                            "name": "Div",
+                            "props": { "className": "notice-detail__meta" },
+                            "children": [
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "props": { "className": "notice-detail__date" },
+                                "text": "{{(post?.data?.created_at ?? '').slice(0, 10)}}"
+                              },
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{post?.data?.view_count !== undefined}}",
+                                "props": { "className": "notice-detail__meta-item" },
+                                "children": [
+                                  { "type": "basic", "name": "Icon", "props": { "name": "eye", "size": "sm" } },
+                                  { "type": "basic", "name": "Span", "text": "{{post?.data?.view_count ?? 0}}" }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "comment": "본문",
+                        "type": "composite",
+                        "name": "HtmlContent",
+                        "props": {
+                          "content": "{{post?.data?.content ?? ''}}",
+                          "isHtml": "{{(post?.data?.content_mode ?? 'text') === 'html'}}",
+                          "className": "notice-detail__body"
+                        }
+                      },
+                      {
+                        "comment": "첨부파일 (정상 조회 가능 시)",
+                        "if": "{{(post?.data?.attachments ?? []).length > 0}}",
+                        "partial": "partials/board/show/_post_attachments.json"
+                      },
+                      {
+                        "comment": "하단 액션: 목록 + (관리자) 수정",
+                        "type": "basic",
+                        "name": "Div",
+                        "props": { "className": "notice-detail__actions" },
+                        "children": [
+                          {
+                            "type": "basic",
+                            "name": "Button",
+                            "props": { "type": "button", "className": "notice-detail__btn notice-detail__btn--list" },
+                            "actions": [
+                              { "type": "click", "handler": "navigate", "params": { "path": "/board/notice" } }
+                            ],
+                            "children": [
+                              { "type": "basic", "name": "Icon", "props": { "name": "list", "size": "sm" } },
+                              { "type": "basic", "name": "Span", "text": "목록" }
+                            ]
+                          },
+                          {
+                            "type": "basic",
+                            "name": "Div",
+                            "if": "{{post?.data?.abilities?.can_manage || post?.data?.is_author}}",
+                            "props": { "className": "notice-detail__admin" },
+                            "children": [
+                              {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": { "type": "button", "className": "notice-detail__btn notice-detail__btn--ghost" },
+                                "actions": [
+                                  { "type": "click", "handler": "navigate", "params": { "path": "/board/notice/{{route.id}}/edit" } }
+                                ],
+                                "children": [
+                                  { "type": "basic", "name": "Icon", "props": { "name": "pencil", "size": "sm" } },
+                                  { "type": "basic", "name": "Span", "text": "수정" }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "comment": "이전/다음 글",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{nav?.data?.prev || nav?.data?.next}}",
+                        "props": { "className": "notice-detail__siblings" },
+                        "children": [
+                          {
+                            "type": "basic",
+                            "name": "Button",
+                            "if": "{{nav?.data?.prev}}",
+                            "props": { "type": "button", "className": "notice-detail__sib" },
+                            "actions": [
+                              { "type": "click", "handler": "navigate", "params": { "path": "/board/notice/{{nav?.data?.prev?.id}}" } }
+                            ],
+                            "children": [
+                              { "type": "basic", "name": "Span", "props": { "className": "notice-detail__sib-label" }, "text": "이전 글" },
+                              { "type": "basic", "name": "Span", "props": { "className": "notice-detail__sib-title" }, "text": "{{nav?.data?.prev?.title ?? ''}}" }
+                            ]
+                          },
+                          {
+                            "type": "basic",
+                            "name": "Button",
+                            "if": "{{nav?.data?.next}}",
+                            "props": { "type": "button", "className": "notice-detail__sib" },
+                            "actions": [
+                              { "type": "click", "handler": "navigate", "params": { "path": "/board/notice/{{nav?.data?.next?.id}}" } }
+                            ],
+                            "children": [
+                              { "type": "basic", "name": "Span", "props": { "className": "notice-detail__sib-label" }, "text": "다음 글" },
+                              { "type": "basic", "name": "Span", "props": { "className": "notice-detail__sib-title" }, "text": "{{nav?.data?.next?.title ?? ''}}" }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          { "partial": "partials/home-aict/_aict_footer.json" }
+        ]
+      }
+    ]
+  }
+}
