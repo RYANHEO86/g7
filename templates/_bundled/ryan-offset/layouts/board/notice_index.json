@@ -205,10 +205,10 @@
                     ]
                   },
                   {
-                    "comment": "빈 상태",
+                    "comment": "빈 상태 — board.slug 로드 가드로 progressive 로딩 중 깜빡임 방지(코어 _empty_states 패턴)",
                     "type": "basic",
                     "name": "Div",
-                    "if": "{{(posts?.data?.data ?? []).length === 0}}",
+                    "if": "{{posts?.data?.board?.slug && (posts?.data?.data ?? []).length === 0}}",
                     "props": { "className": "notice-board__empty" },
                     "text": "등록된 공지가 없습니다."
                   },
