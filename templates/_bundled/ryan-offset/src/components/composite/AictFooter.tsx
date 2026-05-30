@@ -167,16 +167,16 @@ const AictFooter: React.FC = () => {
             </P>
           </Div>
 
-          <Div className="footer-marks" aria-label="인증마크">
+          <Div className="footer-marks" aria-label="오프셋테마 엠블럼">
             <Img
               className="footer-marks__img"
-              src={`${ASSET_BASE}/footer/friendly_mark.png`}
-              alt="가족친화 우수기업 인증 마크"
+              src={`${ASSET_BASE}/footer/offset-badge-premium.png`}
+              alt="오프셋테마 프리미엄 엠블럼"
             />
             <Img
               className="footer-marks__img"
-              src={`${ASSET_BASE}/common/webwatch_mark.png`}
-              alt="웹와치 웹접근성 인증 마크"
+              src={`${ASSET_BASE}/footer/offset-badge-studio.png`}
+              alt="오프셋테마 디자인 스튜디오 엠블럼"
             />
           </Div>
         </Div>
