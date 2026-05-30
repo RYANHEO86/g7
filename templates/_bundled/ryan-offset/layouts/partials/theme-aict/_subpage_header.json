@@ -20,8 +20,8 @@
         "active": true
       },
       {
-        "label": "제작의뢰",
-        "href": "/inquiry"
+        "label": "알림장",
+        "href": "/board/notice"
       },
       {
         "label": "가격",
