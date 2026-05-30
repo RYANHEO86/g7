@@ -27,14 +27,14 @@ docs에 없는 문법/핸들러/props는 "존재하지 않는 것"으로 간주�
 
 > IRON LAW의 짝이다. 코드를 쓸 때 추측을 금지하듯, **버그를 쫓을 때도 추측으로 원인을 단정하지 마라.** 순서는 항상 **관찰 → 갈라치기 → 그 다음 추론**이다.
 > (실패 사례: "해당 권한이 없습니다" 토스트 하나에 50분 — 메시지를 믿고 권한 시스템을 깊게 팠으나, 실제 원인은 전용 라우트에서 `route.slug`가 비어 폼이 `/boards//posts`로 POST한 것이었다. 빈 요청 1번(403/422 판정)이면 2분에 끝날 일이었다.)
-> (실패 사례 2: 메인 알림장이 빈 화면 — 30분+. 코드(props명·optional chaining·React fiber)를 의심했으나 첫 구현은 옳았다. 진짜 원인은 **레이아웃 file 캐시가 옛 partial을 계속 서빙**한 것. "data_source엔 글 7개인데 화면은 0개"라는 모순이 떴을 때 코드 대신 캐시/서빙을 봤어야 했다. + 검증 브라우저 2개를 섞어 한쪽 stale 캐시에 더 속았다.)
+> (실패 사례 2: 메인 알림장 변경이 화면에 안 보임 — 여러 번 헤맴. 코드(props명·optional chaining·React fiber)를 의심했으나 첫 구현은 옳았다. 진짜 원인은 **캐시 버스팅**(레이아웃은 `?v={ext.cache_version}`로 브라우저 HTTP 캐시 무효화)이었고, 결정적으로 내가 "반영하려고" 매번 실행한 **`Cache::flush()`가 그 버전 키(`g7:core:ext.cache_version`)를 0으로 리셋** → `?v=0` 고정 → 브라우저 캐시(max-age 1h)가 옛 화면을 영구 박제했다. 모순("data_source엔 N개인데 화면 0개")이 떴을 때 코드 대신 `config.json`의 cache_version을 봤어야 했다.)
 
 1. **에러 메시지를 믿지 말고 출처를 특정하라.** "권한이 없습니다" 같은 문자열은 여러 경로에서 똑같이 나온다. 메시지는 *"어디서 멈췄나"*지 *"왜 멈췄나"*가 아니다. 먼저 `grep`으로 그 메시지를 뱉는 코드 줄을 찾아라.
 2. **정적 추론(코드·DB 읽기) 전에 런타임 관찰 1개를 먼저 하라.** 실패하는 요청의 실제 URL·payload·응답코드(Network), 콘솔, DevTools 상태. 화면/요청이 *실제로* 뭘 하는지가 코드 추론 10번보다 빠르다.
 3. **이분법 실험으로 영역을 갈라쳐라.** 예: "권한 문제인가 입력 문제인가?" → 빈/최소 요청을 직접 보내 403(권한 차단)인지 422(검증 도달 = 권한 통과)인지 한 번에 판정. 갈래를 좁히고 나서 그 안만 파라.
 4. **모순이 나오면 가설(프레임)을 버려라.** "데이터는 완벽한데 실패한다", "A는 되는데 동일해야 할 B는 안 된다"는 → *지금 보는 영역이 원인이 아니다*라는 신호다. 같은 가설로 15분 이상 헤매면 멈추고, 가정을 글로 적고 의심하라.
 5. 그누7 런타임/바인딩 버그는 추측 말고 **DevTools MCP**(`g7-state`/`g7-diagnose`/`g7-expressions`/`g7-form`/`g7-actions`)로 실제 상태부터 확인하라.
-6. **레이아웃 JSON 수정이 화면에 안 보이면, 코드가 아니라 캐시/서빙을 먼저 의심하라.** 그누7 레이아웃은 file 캐시로 박제된다(`.env CACHE_STORE` 무시). 반영은 build/install/activate 반복이 아니라 `template:refresh-layout` + `template:cache-clear`(안 되면 `Cache::flush()`) → 하드리로드다. 화면이 안 바뀌면 *서버가 지금 주는 실제 JSON*(nocache fetch)이 내 최신본인지 1분 갈라치기로 먼저 판정하고, 검증 브라우저는 1개로 고정하라.
+6. **레이아웃/컴포넌트 수정이 화면에 안 보이면, 코드가 아니라 캐시 버스팅을 의심하라.** 그누7은 `?v={ext.cache_version}` 쿼리로 브라우저 HTTP 캐시(max-age 1h)를 무효화한다(`docs/extension/template-caching.md` "확장 기능 캐시 버전 / Cache Busting"). **정석 반영 = `template:build → template:update`(또는 `template:install --force` + `template:activate`)뿐 — `activate`가 `g7:core:ext.cache_version`(timestamp)을 올려 `?v=`를 바꿔 자동 무효화**한다. ⚠️ **`Cache::flush()`·`cache:clear` 금지**: 그 버전 키까지 날려 `?v=0` 고정 → 브라우저가 옛 화면을 영구 박제한다(이 함정에 두 번 빠짐). 화면이 안 바뀌면 코드 말고 `curl .../api/templates/{id}/config.json`의 `cache_version`이 실제로 올랐는지부터 확인하고, 검증 브라우저는 1개로 고정하라.
 
 ---
 
