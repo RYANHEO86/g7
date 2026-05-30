@@ -165,10 +165,135 @@
 @media (max-width: 1080px) {
   .gnb, .gnb_layout { display: none; }
   .utile_wrap .util-menu { display: inline-flex; }
+  /* gnb 숨김 시 grid 중앙(auto) 칸으로 utile 이 당겨지지 않도록 2컬럼(로고 좌·버튼 우)로 */
+  #aict-top-layout .top_wrap { grid-template-columns: 1fr auto; }
 }
 @media (max-width: 880px) {
   #aict-top-layout { height: 72px; }
-  .logo-link { width: 168px; height: 30px; }
+  .logo-link { width: 176px; height: 42px; }
   .utile_wrap .login-btn { height: 36px; padding: 0 16px; font-size: 13px; }
+}
+
+/* ============================================================
+   모바일 슬라이드 드로어 (≤1080px 햄버거로 토글) — OverlayHeader 자체 메뉴
+   ============================================================ */
+.aict-mdrawer {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  visibility: hidden;
+  pointer-events: none;
+}
+.aict-mdrawer.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+.aict-mdrawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 25, 0.45);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+}
+.aict-mdrawer.is-open .aict-mdrawer__backdrop {
+  opacity: 1;
+}
+.aict-mdrawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 82%;
+  max-width: 340px;
+  background: var(--bg);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.18);
+  transform: translateX(100%);
+  transition: transform 0.32s var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  padding: 76px 28px 32px;
+  overflow-y: auto;
+}
+.aict-mdrawer.is-open .aict-mdrawer__panel {
+  transform: translateX(0);
+}
+.aict-mdrawer__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-pill);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--t-fast);
+}
+.aict-mdrawer__close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.aict-mdrawer__close::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23161616' stroke-width='1.8' stroke-linecap='round'><path d='M6 6l12 12M18 6L6 18'/></svg>") no-repeat center / contain;
+}
+.aict-mdrawer__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.aict-mdrawer__nav a {
+  display: block;
+  padding: 15px 4px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--line);
+  transition: color var(--t-fast);
+}
+.aict-mdrawer__nav a:hover,
+.aict-mdrawer__nav a.is-active {
+  color: var(--brand);
+}
+.aict-mdrawer__auth {
+  margin-top: auto;
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.aict-mdrawer__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-radius: var(--r-pill);
+  background: var(--brand);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  border: 1px solid var(--brand);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+}
+.aict-mdrawer__btn:hover {
+  background: var(--brand-2);
+  border-color: var(--brand-2);
+}
+.aict-mdrawer__btn--ghost {
+  background: transparent;
+  color: var(--ink-3);
+  border-color: var(--line-2);
+}
+.aict-mdrawer__btn--ghost:hover {
+  background: var(--bg-soft);
+  color: var(--ink);
+  border-color: var(--line-2);
 }
 }

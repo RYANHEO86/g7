@@ -52,6 +52,7 @@ const OverlayHeader: React.FC<OverlayHeaderProps> = ({
   currentUser = null,
 }) => {
   const [solid, setSolid] = useState(variant === 'subpage');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -62,10 +63,18 @@ const OverlayHeader: React.FC<OverlayHeaderProps> = ({
     return () => window.removeEventListener('scroll', onScroll);
   }, [thresholdPx, variant]);
 
+  // 드로어 열림 동안 본문 스크롤 잠금
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   const typeClass = variant === 'subpage' ? 'type-subpage' : 'type-overlay';
   const headerClass = [typeClass, solid ? 'is-solid' : '', className].filter(Boolean).join(' ');
 
   const isLoggedIn = !!currentUser?.uuid;
+  const closeMenu = () => setMobileOpen(false);
 
   const handleLogout = () => {
     const core = G7Core();
@@ -122,9 +131,59 @@ const OverlayHeader: React.FC<OverlayHeaderProps> = ({
             </Li>
           )}
           <Li className="util-menu">
-            <A href="#" className="ico-btn" aria-label={menuButtonAriaLabel} />
+            <Button
+              type="button"
+              className="ico-btn"
+              aria-label={menuButtonAriaLabel}
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen(true)}
+            />
           </Li>
         </Ul>
+      </Div>
+
+      {/* 모바일 슬라이드 드로어 (≤1080px 햄버거로 토글) */}
+      <Div className={`aict-mdrawer${mobileOpen ? ' is-open' : ''}`}>
+        <Div className="aict-mdrawer__backdrop" onClick={closeMenu} aria-hidden="true" />
+        <Div className="aict-mdrawer__panel" role="dialog" aria-modal="true" aria-label="모바일 메뉴">
+          <Button type="button" className="aict-mdrawer__close" aria-label="메뉴 닫기" onClick={closeMenu} />
+          <Nav className="aict-mdrawer__nav" aria-label="모바일 메뉴">
+            <Ul>
+              {menu.map((m, i) => (
+                <Li key={i}>
+                  <A
+                    href={m.href}
+                    className={m.active ? 'is-active' : ''}
+                    aria-current={m.active ? 'page' : undefined}
+                    onClick={closeMenu}
+                  >
+                    {m.label}
+                  </A>
+                </Li>
+              ))}
+            </Ul>
+          </Nav>
+          <Div className="aict-mdrawer__auth">
+            {isLoggedIn ? (
+              <>
+                <A href={myHref} className="aict-mdrawer__btn" onClick={closeMenu}>
+                  {currentUser?.name ? `${currentUser.name} ${myLabel}` : myLabel}
+                </A>
+                <Button
+                  type="button"
+                  className="aict-mdrawer__btn aict-mdrawer__btn--ghost"
+                  onClick={() => { closeMenu(); handleLogout(); }}
+                >
+                  {logoutLabel}
+                </Button>
+              </>
+            ) : (
+              <A href={loginHref} className="aict-mdrawer__btn" onClick={closeMenu}>
+                {loginLabel}
+              </A>
+            )}
+          </Div>
+        </Div>
       </Div>
     </Div>
   );
