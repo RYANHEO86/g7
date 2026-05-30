@@ -1,7 +1,7 @@
 import { default as React } from 'react';
 /**
- * S4 — 알림마당 + 융기원 동향 + 발간물 + POPUP ZONE 영역.
- * 2-column grid (section2-left / section2-right).
+ * S4 — 알림장(좌) + 프로모션 배너(우) 2-column.
+ * 우측 배너는 4:3 단일 링크 배너 (PC·모바일 동일 비율).
  */
 declare const NoticeArea: React.FC;
 export default NoticeArea;

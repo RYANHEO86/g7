@@ -1,7 +1,6 @@
 import React from 'react';
-import { Div, Section } from '../basic';
+import { Div, Section, A, Img } from '../basic';
 import NoticeTab, { NoticeListItem, NoticeTabDef } from './NoticeTab';
-import PopupSlider, { PopupSlideItem } from './PopupSlider';
 
 const ASSET_BASE =
   '/api/templates/assets/ryan-offset/assets/images/aict';
@@ -57,15 +56,9 @@ const NOTICE_LISTS: Record<string, NoticeListItem[]> = {
   ],
 };
 
-const POSTERS: PopupSlideItem[] = [
-  { image: `${ASSET_BASE}/popup/poster1.jpg`, alt: '포스터 1' },
-  { image: `${ASSET_BASE}/popup/poster2.png`, alt: '포스터 2' },
-  { image: `${ASSET_BASE}/popup/poster3.png`, alt: '포스터 3' },
-];
-
 /**
- * S4 — 알림마당 + 융기원 동향 + 발간물 + POPUP ZONE 영역.
- * 2-column grid (section2-left / section2-right).
+ * S4 — 알림장(좌) + 프로모션 배너(우) 2-column.
+ * 우측 배너는 4:3 단일 링크 배너 (PC·모바일 동일 비율).
  */
 const NoticeArea: React.FC = () => {
   return (
@@ -85,9 +78,18 @@ const NoticeArea: React.FC = () => {
             />
           </Div>
 
-          {/* RIGHT COLUMN */}
+          {/* RIGHT COLUMN — 프로모션 배너 (4:3, 링크 일단 #) */}
           <Div className="section2-right">
-            <PopupSlider posters={POSTERS} title="" className="reveal reveal--delay-1" />
+            <A
+              href="#"
+              className="promo-banner reveal reveal--delay-1"
+              aria-label="선착순 5명 무료 제작 지원 — 지금 무료 신청"
+            >
+              <Img
+                src={`${ASSET_BASE}/main/promo-free-build.png`}
+                alt="OFFSET THEME 오픈 기념 — 선착순 5명 무료 제작 지원. 30만원 상당 웹사이트 제작, 테마 설치부터 메인페이지 세팅까지. 2026.6.30까지 잔여 5명."
+              />
+            </A>
           </Div>
         </Div>
       </Div>

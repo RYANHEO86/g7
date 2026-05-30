@@ -27,6 +27,27 @@
   min-width: 0;
 }
 
+/* 우측 프로모션 배너 — 4:3 단일 링크 배너 (PC·모바일 동일 비율) */
+.section2 .promo-banner {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--sh-2);
+  transition: transform var(--t), box-shadow var(--t);
+}
+.section2 .promo-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-3);
+}
+.section2 .promo-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* =========================================================
    알림마당 (notice-card)
    ========================================================= */
