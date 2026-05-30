@@ -64,8 +64,9 @@ class Plugin extends AbstractPlugin
                 'use_reply'          => false,
                 'use_report'         => false,
                 'use_file_upload'    => true,
-                'max_file_size'      => 5242880,
-                'max_file_count'     => 3,
+                // max_file_size 단위는 MB (BoardResource가 그대로 직렬화 → FileUploader가 MB로 표시)
+                'max_file_size'      => 10,
+                'max_file_count'     => 5,
                 'allowed_extensions' => ['jpg', 'jpeg', 'png', 'pdf'],
                 'show_view_count'    => true,
                 'per_page'           => 20,
