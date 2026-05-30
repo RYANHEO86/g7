@@ -86,7 +86,7 @@ const NoticeArea: React.FC = () => {
               aria-label="선착순 5명 무료 제작 지원 — 지금 무료 신청"
             >
               <Img
-                src={`${ASSET_BASE}/main/promo-free-build.png`}
+                src={`${ASSET_BASE}/main/promo-free-build.webp`}
                 alt="OFFSET THEME 오픈 기념 — 선착순 5명 무료 제작 지원. 30만원 상당 웹사이트 제작, 테마 설치부터 메인페이지 세팅까지. 2026.6.30까지 잔여 5명."
               />
             </A>
