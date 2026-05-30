@@ -10,11 +10,17 @@ class Plugin extends AbstractPlugin
 {
     /**
      * 설치 시 qna(문의) 게시판을 멱등 생성한다.
-     * secret_mode=enabled, 본인+관리자만 비밀글 열람, 카테고리 4종.
+     * secret_mode=always(항상 비밀글 강제 — 서버가 is_secret=true 강제), 본인+관리자만 열람, 카테고리 4종.
      */
     public function install(): bool
     {
-        if (Board::where('slug', 'qna')->exists()) {
+        // 이미 설치된 환경: secret_mode 를 always 로 수렴시키고 종료 (재설치 시 기존 레코드 보정)
+        $existing = Board::where('slug', 'qna')->first();
+        if ($existing) {
+            if (($existing->secret_mode->value ?? null) !== 'always') {
+                app(BoardService::class)->updateBoard($existing->id, ['secret_mode' => 'always']);
+            }
+
             return true;
         }
 
@@ -26,7 +32,7 @@ class Plugin extends AbstractPlugin
             'description'        => ['ko' => '궁금한 점을 1:1로 문의하세요 (작성자 본인만 열람).', 'en' => 'Ask privately.'],
             'type'               => 'basic',
             'is_active'          => true,
-            'secret_mode'        => 'enabled',
+            'secret_mode'        => 'always',
             'use_comment'        => true,
             'use_reply'          => true,
             'max_reply_depth'    => 3,

@@ -100,7 +100,7 @@
                         "trackChanges": true,
                         "props": { "className": "qna-write py-10 max-w-3xl mx-auto" },
                         "children": [
-                            { "partial": "partials/board/form/_type_renderer.json" }
+                            { "partial": "partials/board/form/_qna_form.json" }
                         ]
                     },
                     { "partial": "partials/home-aict/_aict_footer.json" }

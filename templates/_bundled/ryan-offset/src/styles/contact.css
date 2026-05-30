@@ -254,4 +254,160 @@
   border-radius: 999px !important;
 }
 
+/* ============================================================
+   문의 작성 전용 폼 (_qna_form.json) — 사이트 톤 시맨틱 클래스
+   ============================================================ */
+
+/* 상단 안내 박스 */
+.qna-form__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-mint);
+  border-radius: var(--r-lg);
+  padding: 18px 20px;
+}
+.qna-form__intro-icon {
+  flex: 0 0 auto;
+  color: var(--brand);
+  margin-top: 2px;
+}
+.qna-form__intro-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.qna-form__intro-desc {
+  font-size: 13.5px;
+  color: var(--ink-4);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* 필드 라벨 */
+.qna-form__label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.qna-form__req {
+  color: var(--danger);
+  margin-left: 3px;
+}
+
+/* 텍스트 입력 */
+.qna-form__input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.qna-form__input::placeholder { color: var(--muted); }
+.qna-form__input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 162, 105, 0.15);
+}
+.qna-form__input.is-error {
+  border-color: var(--danger);
+}
+.qna-form__input.is-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 45, 45, 0.15);
+}
+
+.qna-form__error {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--danger);
+}
+.qna-form__hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* 카테고리 칩 */
+.qna-form__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.qna-form__chip {
+  padding: 9px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--bg);
+  color: var(--ink-3);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+}
+.qna-form__chip:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.qna-form__chip.is-active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+/* 버튼 영역 */
+.qna-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.qna-form__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t-fast), transform var(--t-fast), border-color var(--t-fast);
+}
+.qna-form__btn--ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-3);
+}
+.qna-form__btn--ghost:hover {
+  background: var(--bg-soft);
+  border-color: var(--line-2);
+}
+.qna-form__btn--primary {
+  background: var(--brand);
+  border: 1px solid var(--brand);
+  color: #fff;
+}
+.qna-form__btn--primary:hover {
+  background: var(--brand-2);
+  border-color: var(--brand-2);
+  transform: translateY(-1px);
+}
+.qna-form__btn--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 }
