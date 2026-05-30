@@ -115,13 +115,26 @@
 .theme-list__filter {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
+  /* 모바일: 한 줄 가로 스와이프(스크롤바 숨김 + 스냅). 데스크탑은 칩이 다 들어가 스크롤 없음 */
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* flex item 이 부모 폭으로 줄어들어야 overflow 스크롤이 작동 (min-width:auto 면 내용만큼 늘어나 부모를 넘침).
+     부모가 column flex 라 width:100% 로 부모 폭에 고정해야 내용(칩)이 overflow 된다 */
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
 }
+.theme-list__filter::-webkit-scrollbar { display: none; }
 .filter-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
   padding: 10px 18px;
   border-radius: var(--r-pill);
   border: 1px solid var(--line-2);

@@ -22,7 +22,9 @@
 #aict-top-layout .top_wrap {
   height: 100%;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  /* 좌·우를 동일한 1fr 로 두어 중앙 메뉴(auto)가 항상 뷰포트 정중앙에 고정된다.
+     우측 버튼 개수(로그인 1개 vs 로그아웃+MY 2개)가 바뀌어도 메뉴 위치 불변. */
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 32px;
   padding: 0 48px;
@@ -31,7 +33,7 @@
 }
 
 /* Logo — white on overlay, black on solid */
-.logo_wrap { line-height: 0; }
+.logo_wrap { line-height: 0; justify-self: start; }
 .logo-link {
   display: block;
   width: 200px;

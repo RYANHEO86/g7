@@ -322,6 +322,12 @@
   font-weight: 600;
   color: var(--ink-2);
   white-space: nowrap;
+  /* 모바일 가로 스와이프 시 첫 열(항목)은 고정되어 기준이 유지된다 */
+  position: sticky;
+  left: 0;
+  background: var(--bg);
+  z-index: 1;
+  box-shadow: 1px 0 0 var(--line);
 }
 .pricing .compare-table__planhead {
   font-family: var(--font-display);

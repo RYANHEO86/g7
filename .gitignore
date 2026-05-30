@@ -122,3 +122,6 @@ id_ed25519
 *.db
 
 .claude/tmp/
+
+# 나노바나나 이미지 생성 임시 산출물
+generated_imgs/
