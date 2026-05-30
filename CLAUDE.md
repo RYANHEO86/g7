@@ -73,6 +73,26 @@ docs에 없는 문법/핸들러/props는 "존재하지 않는 것"으로 간주�
 
 ---
 
+## 🧬 작업유형 → 참조 원본 코드 (추측 말고 "정답지"부터 베껴라)
+
+> IRON LAW의 실전판이자 짝이다. 신생 프레임워크라 **코어/번들(`sirsoft-*`)이 검증된 정답지 + 스타일 가이드**다. docs를 읽었어도, 구현 전 아래 원본을 먼저 `Read` 하고 **구조를 베끼되 가드·조건의 "왜"를 이해한 뒤 변형**하라(맹목 복사도 위험 — 의도를 모르고 가드를 빼면 같은 버그). 추측 코드는 버그뿐 아니라 본사 업데이트 충돌·오염 전파라는 **영구 부채**를 남긴다.
+>
+> (실패 사례: notice 리스트 빈 상태를 코어 `_empty_states`의 `posts?.data?.board?.slug` 로드 가드 없이 직접 `length===0`으로 짜서 progressive 로딩 깜빡임 버그. 반대로 알림장 연동·작성폼·서브헤더는 기존 검증 코드를 복제해 한 번에 동작했다.)
+
+| 작업 | 참조 원본(베낄 정답지) |
+|------|----------------------|
+| 게시판 리스트/뷰/쓰기 | `layouts/partials/board/types/basic/{index,show,form}.json` |
+| 게시판 빈 상태 | `layouts/partials/board/index/_empty_states.json` (⚠️ `posts?.data?.board?.slug` 로드 가드 = progressive 깜빡임 방지) |
+| 게시판 작성 폼 | `layouts/partials/board/form/_post_form.json` (전용폼은 `_qna_form.json` 복제) |
+| 메인 ↔ 게시판 연동 | `layouts/partials/home-aict/_section_themes.json` + `src/components/composite/ThemesSection.tsx` (themePosts 패턴) |
+| 서브헤더/푸터 | `partials/theme-aict/_subpage_header.json`, `partials/home-aict/_aict_footer.json` |
+| 모듈 백엔드(Service/Repo/Controller) | `modules/_bundled/sirsoft-board/src/{Services,Repositories,Http}` |
+| 플러그인 라우트/미들웨어 | `plugins/_bundled/sirsoft-*` — 공개 API는 `optional.sanctum`(코어 레이아웃 serve와 동일), 인증 필수만 `auth:sanctum` |
+
+> 이 표에 없으면 **`modules/_bundled/sirsoft-board`**(게시판 전반)·**`templates/_bundled/sirsoft-basic`**(원본 테마, 우리 `ryan-offset`의 출처)에서 유사 구현을 먼저 `ls`/`grep`으로 찾아라.
+
+---
+
 ## 🚫 절대 금지 규칙 (자주 틀리는 것 — 전체는 `AGENTS.md` "CRITICAL RULES" 참조)
 
 - **HTML 태그 직접 사용 금지** → `Div`, `Button`, `Span` 등 컴포넌트 사용
