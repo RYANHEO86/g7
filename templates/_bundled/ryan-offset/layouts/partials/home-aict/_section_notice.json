@@ -7,11 +7,12 @@
   "name": "NoticeArea",
   "props": {
     "tabs": [
+      { "key": "전체", "label": "전체" },
       { "key": "공지사항", "label": "공지사항" },
       { "key": "업데이트", "label": "업데이트" },
       { "key": "이벤트", "label": "이벤트" }
     ],
-    "defaultTab": "공지사항",
+    "defaultTab": "전체",
     "moreHref": "/board/notice",
     "rows": "{{(noticePosts.data.data ?? []).map(p => ({ title: (p.title ?? ''), date: (p.created_at ?? ''), href: '/board/notice/' + p.id, category: (p.category ?? '') }))}}"
   }

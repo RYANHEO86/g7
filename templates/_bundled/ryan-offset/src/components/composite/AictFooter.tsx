@@ -143,27 +143,34 @@ const AictFooter: React.FC = () => {
               src={`${ASSET_BASE}/brand/offset-theme-logo-light.png`}
               alt="Offset Theme 로고"
             />
+            <P className="footer-info__row footer-info__row--inline">
+              <Span className="info-cell">
+                <Span className="label">상호</Span> 오프셋테마 (Offset Theme)
+              </Span>
+              <Span className="info-cell">
+                <Span className="label">대표</Span> 허우제
+              </Span>
+              <Span className="info-cell">
+                <Span className="label">이메일</Span> help@offsettheme.kr
+              </Span>
+            </P>
             <P className="footer-info__row">
               <Span className="label">주소</Span>
-              <Span>
-                (16229) 경기도 수원시 영통구 광교로 145(구:이의동 864-1)
-                차세대융합기술연구원
-              </Span>
+              <Span>서울특별시 강남구 테헤란로 152, 오프셋빌딩 8층</Span>
             </P>
             <P className="footer-info__row footer-info__row--inline">
               <Span className="info-cell">
-                <Span className="label">TEL</Span> 031-888-9114, 9115
+                <Span className="label">TEL</Span> 1577-0000
               </Span>
               <Span className="info-cell">
-                <Span className="label">사업자등록번호</Span> 135-82-12905
+                <Span className="label">사업자등록번호</Span> 123-45-67890
               </Span>
               <Span className="info-cell">
-                <Span className="label">통신판매업신고</Span> 제2013-수원영통-0318호
+                <Span className="label">통신판매업신고</Span> 제2026-서울강남-1234호
               </Span>
             </P>
             <P className="footer-info__copy">
-              COPYRIGHT ADVANCED INSTITUTE OF CONVERGENCE TECHNOLOGY. ALL RIGHTS
-              RESERVED.
+              © 2026 Offset Theme. All rights reserved.
             </P>
           </Div>
 

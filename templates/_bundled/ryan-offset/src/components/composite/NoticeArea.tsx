@@ -24,6 +24,10 @@ export interface NoticeAreaProps {
 
 const EMPTY_TABS: NoticeTabDef[] = [];
 const EMPTY_ITEMS: NoticeAreaItem[] = [];
+/** '전체' 탭 — 카테고리 무관 전체 글을 모은다. */
+const ALL_TAB_KEY = '전체';
+/** 탭당 최대 표시 개수 (최신순). */
+const MAX_ROWS = 7;
 
 /**
  * S4 — 알림장(좌, notice 게시판 연동) + 프로모션 배너(우) 2-column.
@@ -36,11 +40,15 @@ const NoticeArea: React.FC<NoticeAreaProps> = ({
   defaultTab,
   moreHref = '/board/notice',
 }) => {
-  // 카테고리(탭 key)별 분류 + 날짜는 앞 10자(YYYY-MM-DD)만
+  // 탭별 분류 — '전체'는 모든 글, 그 외는 카테고리 일치.
+  // 작성일(created_at) 최신순 정렬 후 최대 MAX_ROWS개, 날짜는 앞 10자(YYYY-MM-DD)만.
   const lists: Record<string, NoticeListItem[]> = {};
   tabs.forEach((t) => {
-    lists[t.key] = rows
-      .filter((it) => it.category === t.key)
+    const base =
+      t.key === ALL_TAB_KEY ? rows.slice() : rows.filter((it) => it.category === t.key);
+    lists[t.key] = base
+      .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+      .slice(0, MAX_ROWS)
       .map((it) => ({ title: it.title, date: (it.date ?? '').slice(0, 10), href: it.href }));
   });
 
