@@ -179,10 +179,15 @@ const PricingSection: React.FC = () => {
   const [recommend, setRecommend] = useState<Plan['key'] | null>(null);
 
   const pickRecommend = (a: DiagnoseAnswer) => {
-    if (a === 'self') setRecommend('buy');
-    else if (a === 'fast') setRecommend('setup');
-    else if (a === 'brand') setRecommend('plus');
-    else if (a === 'feature') setRecommend('premium');
+    const map: Record<DiagnoseAnswer, Plan['key']> = {
+      self: 'buy',
+      fast: 'setup',
+      brand: 'plus',
+      feature: 'premium',
+    };
+    const next = map[a];
+    // 같은 선택지를 다시 누르면 해제(토글)
+    setRecommend((prev) => (prev === next ? null : next));
   };
 
   return (
@@ -342,11 +347,11 @@ const PricingSection: React.FC = () => {
                     onClick={() => setOpenFaq(open ? null : i)}
                   >
                     <Span className="faq-item__q-text">{item.q}</Span>
-                    <Span className="faq-item__icon" aria-hidden="true">
-                      {open ? '−' : '+'}
-                    </Span>
+                    <Span className="faq-item__icon" aria-hidden="true">+</Span>
                   </Button>
-                  {open ? <P className="faq-item__a">{item.a}</P> : null}
+                  <Div className="faq-item__a-wrap">
+                    <P className="faq-item__a">{item.a}</P>
+                  </Div>
                 </Li>
               );
             })}

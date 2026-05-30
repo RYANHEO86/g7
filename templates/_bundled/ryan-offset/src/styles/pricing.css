@@ -394,11 +394,35 @@
   color: var(--brand-2);
   line-height: 1;
 }
+/* 답변 펼침 애니메이션 (grid-template-rows 0fr→1fr 으로 height auto 트랜지션) */
+.pricing .faq-item__a-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s var(--ease-out, ease);
+}
+.pricing .faq-item.is-open .faq-item__a-wrap {
+  grid-template-rows: 1fr;
+}
 .pricing .faq-item__a {
-  padding: 0 22px 22px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 22px;
   font-size: 15px;
   color: var(--ink-3);
   line-height: 1.6;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-out, ease), padding-bottom 0.32s var(--ease-out, ease);
+}
+.pricing .faq-item.is-open .faq-item__a {
+  padding-bottom: 22px;
+  opacity: 1;
+}
+/* 아이콘 +/− 부드러운 회전 */
+.pricing .faq-item__icon {
+  transition: transform var(--t-fast), color var(--t-fast);
+}
+.pricing .faq-item.is-open .faq-item__icon {
+  transform: rotate(45deg);
 }
 
 /* 마지막 CTA */
