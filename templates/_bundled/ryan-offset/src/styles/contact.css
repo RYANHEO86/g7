@@ -74,12 +74,33 @@
   font-size: 22px;
   color: var(--brand-2);
   line-height: 1;
+  transition: transform var(--t-fast), color var(--t-fast);
+}
+.contact .faq-item.is-open .faq-item__icon {
+  transform: rotate(45deg);
+}
+/* 답변 펼침 애니메이션 (grid-template-rows 0fr→1fr 으로 height auto 트랜지션) */
+.contact .faq-item__a-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s var(--ease-out, ease);
+}
+.contact .faq-item.is-open .faq-item__a-wrap {
+  grid-template-rows: 1fr;
 }
 .contact .faq-item__a {
-  padding: 0 20px 20px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 20px;
   font-size: 14.5px;
   color: var(--ink-3);
   line-height: 1.65;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-out, ease), padding-bottom 0.32s var(--ease-out, ease);
+}
+.contact .faq-item.is-open .faq-item__a {
+  padding-bottom: 20px;
+  opacity: 1;
 }
 
 /* 내 문의 위젯 */

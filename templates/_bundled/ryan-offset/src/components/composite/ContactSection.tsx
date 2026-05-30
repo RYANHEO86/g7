@@ -111,11 +111,11 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                       onClick={() => setOpenFaq(open ? null : i)}
                     >
                       <Span className="faq-item__q-text">{item.q}</Span>
-                      <Span className="faq-item__icon" aria-hidden="true">
-                        {open ? '−' : '+'}
-                      </Span>
+                      <Span className="faq-item__icon" aria-hidden="true">+</Span>
                     </Button>
-                    {open ? <P className="faq-item__a">{item.a}</P> : null}
+                    <Div className="faq-item__a-wrap">
+                      <P className="faq-item__a">{item.a}</P>
+                    </Div>
                   </Li>
                 );
               })}
